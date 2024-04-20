@@ -1,0 +1,35 @@
+.card {
+    margin: 0;
+    padding-top: 51px;
+}
+
+.cards {
+    list-style-type: none;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 17px 20px;
+    
+}
+
+.card__content {
+    width: 282px;
+    height:361px;
+}
+
+.card__name {
+    font-weight: 900;
+    color: #000;
+}
+
+.card__image {
+    border-radius: 10px 10px 0 0;
+    width: 282px;
+    height: 282px;
+
+}
+
+.card__heart {
+    background: transparent url(../images/heart.svg) center no-repeat;
+    width: 21px;
+    height: 18px;
+}

@@ -5,8 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <meta name="author" content="Sara Wenner"/>
         <meta name="description" content="Photo gallery of places around the US"/>
-        <meta name="keywords" content="photos, Jaques Cousteau"/>
-        <link rel="stylesheet" href=".//index.css"/>
+        <meta name="keywords" content="photos, Jacques Cousteau"/>
+        <link rel="stylesheet" href=".//pages/index.css"/>
         <link rel="icon" type="image/x-icon" href=".//favicon.ico"/>
         <Title>Around the US</Title>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -15,16 +15,62 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Noto+Serif:ital@0;1&display=swap"
       rel="stylesheet" />
     </head>
-<body>
-    <div class="page">
-        <h1 class="header__title">
-            Around <span class="header__span-accent">The U.S.</span></h1>
+<body class="page">
+    <div class="page__wrapper">
+        <header class="header page__section">
+            <img src="images/aroundtheuslogo.svg" alt="Around the US logo" class="header__logo">
+            <span class="header__divider"></span> 
         </header>
-        <div class="profile">
-            <img src=".//images/Avatar.png" alt="Avatar of Jaques Cousteau" class="profile__photo">
-            <h2 class="profile__name">Jaques Cousteau</h2>
-        </div>
     </div>
-    
+        <main class="page__content">
+            <section class="profile page__section">
+                <img src=".//images/Avatar.png" alt="Avatar of Jaques Cousteau" class="profile__photo">
+                <div class="profile__info">
+                    <h1 class="profile__name">Jacques Cousteau</h1>
+                    <button class="profile__edit-button"></button>
+                    <p class="profile__subheading">Explorer</p>
+                </div>
+                <button type="button" class="profile__add-button"></button>
+            </section>
+            <section class="card page__section">
+                <ul class="cards">
+                    <li class="card__content">
+                        <img src=".//images/yosemite-valley.jpg" alt= "Yosemite Valley" class="card__image">
+                        <button class="card__heart"></button>
+                        <h2 class="card__name">Yosemite Valley</h2>
+                    </li>
+                    <li class="card__content">
+                        <img src=".//images/lake-louise.png" alt="Lake Louise" class="card__image">
+                        <button class="card__heart"></button>
+                        <h2 class="card__name">Lake Louise</h2>
+                    </li>
+                    <li class="card__content">
+                        <img src=".//images/bald-mountains.png" alt="Bald Mountains" class="card__image">
+                        <button class="card__heart"></button>
+                        <h2 class="card__name">Bald Mountains</h2>
+                    </li>
+                    <li class="card__content">
+                        <img src=".//images/latemar.png" alt="Latemar" class="card__image">
+                        <button class="card__heart"></button>
+                        <h2 class="card__name">Latemar</h2>
+                    </li>
+                    <li class="card__content">
+                        <img src=".//images/vanoise-national-park.png" alt="Vanoise National Park" class="card__image">
+                        <button class="card__heart"></button>
+                        <h2 class="card__name">Vanoise National Park</h2>
+                    </li>
+                    <li class="card__content">
+                        <img src=".//images/lago-di-braies.png" alt="Lago di Braies" class="card__image">
+                        <button class="card__heart"></button>
+                        <h2 class="card__name">Lago di Braies </h2>
+                    </li>
+                    
+
+
+                </div>
+
+            </section>
+        </main> 
+ <footer class="footer">&copy; 2024 Sara Raz</footer>  
 </body>
 </html>

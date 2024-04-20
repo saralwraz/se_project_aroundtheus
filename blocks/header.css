@@ -1,12 +1,21 @@
-.header__title {
+.header{
+    max-width: 880px;
+    height: 74px;
+    margin-top: 45px;
+    margin-left: 200px;
+    margin-right: 200px;
+
+}
+.header__logo {
     width: 173px;
     height: 33px;
-    top: 45px;
-    left: 200px;
-    gap: 0px;
-    opacity: 0px;
-    font-family: "Inter", sans-serif;
-    font-weight: 400;
-    color: #FFF;
+    margin-top: 45px;
+    margin-bottom: 37px;
+}
 
+.header__divider {
+    display: flex;
+    gap: 40px;
+    border: solid 1px #545454;
+    opacity: 70%;
 }
