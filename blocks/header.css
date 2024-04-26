@@ -19,3 +19,14 @@
     border: solid 1px #545454;
     opacity: 70%;
 }
+
+@media screen and (max-width:320px) {
+    .header {
+        margin: 28px 0;
+    }
+    .header__logo {
+        width: 126px;
+        height: 24px;
+        margin: auto;
+    }
+}

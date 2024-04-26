@@ -22,12 +22,17 @@
 
 .page__content {
     grid-area: content;
-    margin-left: 200px;
-    margin-right: 200px;
+    margin: 0;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width:480px) {
+    .page {
+        margin: auto;
+        max-width: 282px;
+    }
+
     .page__content {
         padding: 0;
     }
+
 }
