@@ -10,6 +10,12 @@
     line-height: 18px;
   }
 
+  @media screen and (max-width: 890px){
+    .footer__copyright {
+        margin-left: auto;
+    }
+  }
+
   @media screen and (max-width: 620px) {
     .footer__copyright {
       margin-left: 15px;
