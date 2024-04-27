@@ -1,20 +1,12 @@
-Project 3: Around The U.S.
-Overview
+# Project 3: Around The U.S.
+## Photo gallery of Jacques Cousteau's places
 
-    Intro
-    Figma
-    Images
+## What I did in this project:
 
-Intro
+I used HTML and CSS as like the previous projects, however this time I made the website viewable on multiple popular screen sizes. It was very challenging, but enjoyable!
 
-This project is made so all the elements are displayed correctly on popular screen sizes. We recommend investing more time in completing this project, since it's more difficult than previous ones.
+**[Link to the project's Figma](https://www.figma.com/file/Es8zZP3ARGH9JGcw60i3OD/Sprint-3_-Around-the-US?type=design&node-id=0-1&mode=design&t=FbVMF06UjlRxH5sx-0)**
 
-Figma
+**[Link to my explainer video](https://www.figma.com/file/Es8zZP3ARGH9JGcw60i3OD/Sprint-3_-Around-the-US?type=design&node-id=0-1&mode=design&t=FbVMF06UjlRxH5sx-0)**
 
-    Link to the project on Figma
-
-Images
-
-The way you'll do this at work is by exporting images directly from Figma — we recommend doing that to practice more. Don't forget to optimize them here, so your project loads faster.
-
-Good luck and have fun!
+Thank you for viewing my project! 
