@@ -1,18 +1,20 @@
 .footer {
-    width: 318px;
-    margin-bottom: 60px;
-}
-
-.footer__copy {
-    color: #545454;
+    align-items: center;
+    padding: 67px 0 60px 0;
+  }
+  
+  .footer__copy {
     font-weight: 400;
     font-size: 18px;
-    line-height: 21.78px;
-    padding-top: 67px;
-}
+    color: #545454;
+    margin: 0;
+    line-height: 18px;
+  }
 
-@media screen and (max-width:320px) {
-    .footer {
-        width: 100%;
+  @media screen and (max-width: 620px) {
+    .footer__copyright {
+      margin-left: 15px;
+      line-height: 16.94px;
+      font-size: 14px;
     }
-}
+  }

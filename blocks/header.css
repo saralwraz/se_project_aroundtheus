@@ -1,15 +1,11 @@
 .header{
     max-width: 880px;
-    height: 74px;
     margin-top: 45px;
-    margin-left: 200px;
-    margin-right: 200px;
 
 }
 .header__logo {
     width: 173px;
     height: 33px;
-    margin-top: 45px;
     margin-bottom: 37px;
 }
 
@@ -20,7 +16,7 @@
     opacity: 70%;
 }
 
-@media screen and (max-width:320px) {
+@media screen and (max-width:620px) {
     .header {
         margin: 28px 0;
     }

@@ -1,7 +1,4 @@
 .card {
-    display: flex;
-    flex-direction: column;
-    margin: 0;
     padding-top: 51px;
     align-items: center;
     border-radius: 10px 0 10px 0;
@@ -11,9 +8,11 @@
 .cards {
     list-style-type: none;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px 17px;
-    margin: 51px auto 0;
+    grid-template-columns: repeat(auto-fit, 282px);
+    grid-gap: 20px 17px;
+    justify-content: center;
+
+    margin: 0 auto;
     padding: 0;
 }
 
@@ -76,7 +75,7 @@
 
 
 
-  @media screen and (max-width:320px) {
+  @media screen and (max-width:620px) {
     .cards {
         grid-template-columns: 1fr;
         justify-content: center;
