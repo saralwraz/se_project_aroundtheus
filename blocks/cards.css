@@ -78,9 +78,11 @@
   @media screen and (max-width:620px) {
     .cards {
         grid-template-columns: 1fr;
-        justify-content: center;
         gap: 20px;
         margin-top: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
     .card__content {
         width: 282px;

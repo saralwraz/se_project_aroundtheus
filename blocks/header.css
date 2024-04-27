@@ -6,7 +6,8 @@
 .header__logo {
     width: 173px;
     height: 33px;
-    margin-bottom: 41px;
+    margin: 0;
+    padding-bottom: 41px;
 }
 
 .header__divider {
@@ -18,11 +19,12 @@
 
 @media screen and (max-width:620px) {
     .header {
-        margin: 28px 0;
     }
     .header__logo {
         width: 126px;
         height: 24px;
         margin: auto;
+        padding-bottom: 37px;
+        padding-left: 27px;
     }
 }

@@ -10,6 +10,7 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column nowrap;
+    padding: 0 20px
 }
 
 .page__section {
@@ -26,16 +27,13 @@
 }
 
 @media screen and (max-width:1100px) {
-    .page__section {
-        margin: 0 20px;
-        max-width: calc(100% - 40px);
+    .page__wrapper {
+
     }
 }
 
 @media screen and (max-width:620px) {
     .page {
-        margin: auto;
-        max-width: 282px;
     }
 
     .page__content {
