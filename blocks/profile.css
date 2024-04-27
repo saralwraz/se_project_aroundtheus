@@ -141,10 +141,6 @@
         flex-direction: column;
     }
 
-    .profile__avatar {
-        padding-bottom: 26.25px;
-    }
-
     .profile__name {
         justify-content: center;
         font-size: 22px;
@@ -153,6 +149,7 @@
 
     .profile__info {
         padding-top: 30px;
+        justify-content: center;
     }
 
     .profile__subheading {
@@ -163,6 +160,8 @@
 
     .profile__add-button {
         justify-content: flex-end;
+        width: 282px;
+        height: 50px;
     }
 
 }
