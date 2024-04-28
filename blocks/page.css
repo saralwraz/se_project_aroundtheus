@@ -1,12 +1,12 @@
 .page {
     background-color: #000;
     color: #545454;
-    font-family: "Inter", Arial, sans-serif;
+    font-family: Inter, Arial, sans-serif;
 }
 
 .page__wraper {
     color: #fff;
-    font-family: "Inter", Arial, sans-serif;
+    font-family: Inter, Arial, sans-serif;
     min-height: 100vh;
     display: flex;
     flex-direction: column nowrap;
