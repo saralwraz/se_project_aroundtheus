@@ -1,7 +1,7 @@
 .card {
     display: flex;
     flex-direction: column;
-    
+    margin: auto;
 }
 
 .card__name {
@@ -15,7 +15,7 @@
     text-align: left;
     align-items: center;
     max-width: 282px;
-    
+    box-sizing: border-box
 
 }
 
@@ -48,15 +48,4 @@
 .card__heart:hover {
     cursor: pointer;
     opacity: 50%;
-  }
-
-
-
-  @media screen and (max-width:620px) {
-    .card {
-        width: 282px;
-        height: 361px;
-
-    }
-    
   }
