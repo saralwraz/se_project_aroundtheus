@@ -1,12 +1,4 @@
 .card {
-    padding-top: 51px;
-    align-items: center;
-    border-radius: 10px 0 10px 0;
-    max-width: 880px;
-    margin-bottom: 67px;
-}
-
-.card__content {
     display: flex;
     flex-direction: column;
     
@@ -61,23 +53,10 @@
 
 
   @media screen and (max-width:620px) {
-    .cards {
-        gap: 20px;
-        margin-top: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    .card__content {
+    .card {
         width: 282px;
         height: 361px;
 
     }
     
   }
-
-  @media screen and (max-width: 890px) {
-
-
-  }
- 
