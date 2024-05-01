@@ -1,27 +1,42 @@
 .page {
-    background-color: #000;
-    color: #545454;
-    font-family: Inter, Arial, sans-serif;
+  background-color: #000;
+  color: #545454;
+  font-family: Inter, Arial, sans-serif;
 }
 
 .page__wraper {
-    color: #fff;
-    font-family: Inter, Arial, sans-serif;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column nowrap;
-    padding: 0 20px
+  color: #fff;
+  font-family: Inter, Arial, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column nowrap;
+  padding: 0 20px;
 }
 
 .page__section {
-    position: relative;
-    width: 100%;
-    max-width: 880px;
-    margin: 0 auto;
-
+  width: 100%;
+  max-width: 880px;
+  position: relative;
+  margin: 0 auto;
 }
 
 .page__content {
-    grid-area: content;
-    margin: 0;
+  grid-area: content;
+  margin: 0;
+}
+
+@media screen and (max-width: 1110px) {
+  .page {
+    overflow-x: hidden;
+  }
+}
+
+@media screen and (max-width: 890px) {
+  .page__section {
+    align-items: center;
+  }
+
+  .page__content {
+    padding-top: 28px;
+  }
 }
