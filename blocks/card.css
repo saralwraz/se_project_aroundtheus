@@ -1,51 +1,48 @@
 .card {
-    display: flex;
-    flex-direction: column;
-    margin: auto;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
 }
 
 .card__name {
-    display: flex;
-    font-weight: 900;
-    background-color: #fff;
-    color: #000;
-    justify-content: space-between;
-    border-radius: 0 0 10px 10px;
-    padding: 25px 20px 25px 20px;
-    text-align: left;
-    align-items: center;
-    max-width: 282px;
-    box-sizing: border-box
-
+  display: flex;
+  font-weight: 900;
+  background-color: #fff;
+  color: #000;
+  justify-content: space-between;
+  border-radius: 0 0 10px 10px;
+  padding: 25px 20px 25px 20px;
+  text-align: left;
+  align-items: center;
+  max-width: 282px;
+  box-sizing: border-box;
 }
 
 .card__text {
-    font-weight: 900;
-    font-size: 24px;
-    padding-left: 0;
-    margin: 0;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow:ellipsis;
-    
+  font-weight: 900;
+  font-size: 24px;
+  padding-left: 0;
+  margin: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .card__image {
-    border-radius: 10px 10px 0 0;
-    width: 282px;
-    height: 282px;
-    padding-bottom: 0;
+  border-radius: 10px 10px 0 0;
+  width: 282px;
+  height: 282px;
+  padding-bottom: 0;
 }
 
-
 .card__heart {
-    background: transparent url(../images/heart.svg) center no-repeat;
-    width: 21px;
-    height: 18px;
-    border: none;
+  background: transparent url(../images/heart.svg) center no-repeat;
+  width: 21px;
+  height: 18px;
+  border: none;
 }
 
 .card__heart:hover {
-    cursor: pointer;
-    opacity: 50%;
-  }
+  cursor: pointer;
+  opacity: 50%;
+}

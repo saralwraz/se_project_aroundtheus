@@ -4,7 +4,7 @@
   font-family: Inter, Arial, sans-serif;
 }
 
-.page__wrapper {
+.page__wraper {
   color: #fff;
   font-family: Inter, Arial, sans-serif;
   min-height: 100vh;
@@ -14,9 +14,9 @@
 }
 
 .page__section {
+  position: relative;
   width: 100%;
   max-width: 880px;
-  position: relative;
   margin: 0 auto;
 }
 
@@ -28,25 +28,5 @@
 @media screen and (max-width: 1110px) {
   .page {
     overflow-x: hidden;
-  }
-
-  .page__section {
-    padding: 0 20px;
-  }
-
-  .page__wrapper {
-    margin: 0;
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-}
-@media screen and (max-width: 781px) {
-  .page__section {
-    align-items: center;
-    max-width: 282px;
-  }
-
-  .page__content {
-    padding-top: 28px;
   }
 }
