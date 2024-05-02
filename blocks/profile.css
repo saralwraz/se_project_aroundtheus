@@ -21,7 +21,6 @@
   grid-area: button;
   border: 1px solid #fff;
   position: relative;
-  margin-right: 20px;
 }
 .profile__edit-button:hover {
   cursor: pointer;
@@ -30,9 +29,8 @@
 
 .profile__add-button {
   background: transparent url(../images/plus-sign.svg) center no-repeat;
-  width: auto;
-  max-width: 150px;
-  max-height: 50px;
+  width: 150px;
+  height: 50px;
   margin-left: auto;
   border: 2px solid #fff;
   grid-area: button;
@@ -80,23 +78,16 @@
   margin-right: 24px;
 }
 
-@media screen and (max-width: 775px) {
+@media screen and (max-width: 890px) {
   .profile {
     display: flex;
     align-items: center;
-  }
-
-  .profile__name {
-    font-size: 22px;
-    max-width: 196px;
+    wrap: nowrap;
   }
 
   .profile__add-button {
     max-width: 50px;
     height: 50px;
-  }
-
-  .profile__edit-button {
   }
 }
 
@@ -118,6 +109,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
+
     padding-top: 30px;
     max-width: 282px;
   }
@@ -127,7 +119,9 @@
   }
 
   .profile__name {
+    font-size: 22px;
     text-align: center;
+    max-width: 196px;
   }
 
   .profile__subheading {
@@ -149,15 +143,9 @@
 
   .profile__add-button {
     margin: 0 auto;
-    max-width: 282px;
-    max-height: 50px;
+    width: 282px;
+    height: 50px;
     justify-content: center;
     border: 1px solid #fff;
-  }
-
-  .profile__edit-button,
-  .profile__add-button {
-    width: 150px;
-    height: 50px;
   }
 }
