@@ -14,8 +14,8 @@
 
 .page__section {
   position: relative;
-  width: 100%;
-  max-width: 880px;
+  max-width: 100%;
+  width: 880px;
   margin: 0 auto;
 }
 
