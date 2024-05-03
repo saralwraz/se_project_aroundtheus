@@ -23,3 +23,9 @@
   grid-area: content;
   margin: 0;
 }
+
+@media screen and (max-width: 620px) {
+  .page__section {
+    max-width: 282px;
+  }
+}
