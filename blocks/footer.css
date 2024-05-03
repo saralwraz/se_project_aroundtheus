@@ -18,9 +18,10 @@
 
 @media screen and (max-width: 620px) {
   .footer__copy {
-    margin-left: 19px;
-    margin-right: 19px;
-    padding-top: 46px;
+    margin: 0;
+    padding-left: 19px;
+    padding-right: 19px;
+    padding-top: 45px;
     line-height: 16.94px;
     font-size: 14px;
   }

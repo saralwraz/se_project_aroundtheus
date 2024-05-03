@@ -129,7 +129,7 @@
     text-align: center;
     padding-top: 14px;
     padding-bottom: 36px;
-    max-width: 282px;
+    overflow: hidden;
   }
 
   .profile__edit-button {
