@@ -124,7 +124,6 @@
   .profile__subheading {
     width: 100%;
     font-size: 14px;
-    line-height: 1.2;
     text-align: center;
     padding-bottom: 36px;
   }
@@ -134,7 +133,6 @@
     height: 18px;
     border-width: 1px;
     padding-left: 10px;
-    border: 1px solid #fff;
     margin: 0;
   }
 
@@ -143,6 +141,5 @@
     width: 282px;
     height: 50px;
     justify-content: center;
-    border: 1px solid #fff;
   }
 }

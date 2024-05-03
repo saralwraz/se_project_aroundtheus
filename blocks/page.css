@@ -9,7 +9,8 @@
   font-family: Inter, Arial, sans-serif;
   min-height: 100vh;
   display: flex;
-  flex-direction: column nowrap;
+  flex-direction: column;
+  wrap: nowrap;
   padding: 0 20px;
 }
 
@@ -23,10 +24,4 @@
 .page__content {
   grid-area: content;
   margin: 0;
-}
-
-@media screen and (max-width: 1110px) {
-  .page {
-    overflow-x: hidden;
-  }
 }
