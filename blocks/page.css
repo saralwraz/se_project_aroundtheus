@@ -4,13 +4,12 @@
   font-family: Inter, Arial, sans-serif;
 }
 
-.page__wraper {
+.page__wrapper {
   color: #fff;
   font-family: Inter, Arial, sans-serif;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  wrap: nowrap;
   padding: 0 20px;
 }
 

@@ -79,7 +79,6 @@
   .profile {
     display: flex;
     align-items: center;
-    wrap: nowrap;
   }
 
   .profile__name {
