@@ -102,10 +102,8 @@
   .profile__info {
     margin: 0;
     min-width: 282px;
-    margin-left: 62px;
-    margin-right: 62px;
     align-items: center;
-    display: flex;
+    display: grid;
     flex-wrap: wrap;
     justify-content: center;
     padding-top: 30px;
@@ -135,7 +133,6 @@
     width: 18px;
     height: 18px;
     border-width: 1px;
-    padding-left: 10px;
     margin: 0;
   }
 

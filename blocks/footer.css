@@ -1,5 +1,6 @@
 .footer {
   padding: 67px 0 60px 0;
+  box-sizing: border-box;
 }
 
 .footer__copy {
