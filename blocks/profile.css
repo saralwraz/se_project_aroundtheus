@@ -54,7 +54,7 @@
   max-width: 415px;
 }
 
-.profile__subheading {
+.profile__span-subheading {
   font-size: 18px;
   color: #fff;
   line-height: 1.2;
@@ -101,10 +101,8 @@
 
   .profile__info {
     margin: 0;
-    min-width: 282px;
     align-items: center;
     display: grid;
-    flex-wrap: wrap;
     justify-content: center;
     padding-top: 30px;
   }
@@ -121,7 +119,7 @@
     margin: 0;
   }
 
-  .profile__subheading {
+  .profile__span-subheading {
     font-size: 14px;
     line-height: 16.94px;
     text-align: center;
