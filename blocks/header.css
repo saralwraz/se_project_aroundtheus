@@ -7,7 +7,6 @@
 .header__logo {
   width: 173px;
   height: 33px;
-  margin: 0;
   padding-bottom: 41px;
 }
 
@@ -19,7 +18,6 @@
   .header__logo {
     width: 126px;
     height: 24px;
-    margin: 0;
     padding-top: 28px;
     padding-bottom: 32px;
     padding-left: 27px;
