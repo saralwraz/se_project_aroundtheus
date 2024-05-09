@@ -26,3 +26,7 @@ const initialCards = [
 ];
 
 console.log(initialCards);
+
+function cardContent() {}
+
+cardContent();

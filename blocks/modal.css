@@ -1,0 +1,124 @@
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 19px;
+  z-index: 999;
+}
+
+.modal__opened {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal__container {
+  background-color: #fff;
+  position: relative;
+  padding: 36px;
+  border-radius: 10px;
+  width: 394px;
+  box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.15);
+}
+
+.modal__close {
+  background-image: url(../images/closeicon.svg);
+  border: none;
+  background-color: transparent;
+  position: absolute;
+  top: -45px;
+  right: -45px;
+  width: 40px;
+  height: 40px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+}
+
+.modal__heading {
+  font-family: Inter, Arial, sans-serif;
+  color: #000;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 29.05px;
+  margin: 0;
+  padding-bottom: 54px;
+}
+
+.modal__form {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  border-radius: 1px;
+}
+
+.modal__form input {
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  outline: none;
+}
+
+.modal__form textarea {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16.94px;
+}
+
+input[type="text"] {
+  padding-bottom: 13px;
+}
+
+.modal__form input,
+.modal__form select,
+.modal__form textarea {
+  margin-bottom: 29.74px;
+}
+
+.modal__button {
+  font-family: Inter, Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 21.78px;
+  text-align: center;
+  height: 50.15px;
+  margin-top: 18.26px;
+  background-color: #000;
+  color: #fff;
+  border-radius: 2px;
+  border: none;
+}
+
+@media screen and (max-width: 620px) {
+  .modal {
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  .modal__container {
+    max-width: 282px;
+    height: 322px;
+    padding-bottom: 0;
+  }
+
+  .modal__heading {
+    line-height: 21.78px;
+    font-size: 18px;
+    padding-bottom: 75px;
+  }
+
+  .modal__form {
+    width: 100%;
+  }
+
+  .modal__close {
+    width: 26px;
+    height: 26px;
+    right: 0;
+  }
+}
