@@ -5,7 +5,7 @@
   bottom: 0;
   right: 0;
   background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   padding: 0 19px;
@@ -14,8 +14,6 @@
 
 .modal__opened {
   display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .modal__container {
