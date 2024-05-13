@@ -28,7 +28,11 @@
           />
           <div class="profile__info">
             <h1 class="profile__name">Jacques Cousteau</h1>
-            <button type="button" class="profile__edit-button"></button>
+            <button
+              type="button"
+              class="profile__edit-button"
+              id="profile__edit-button"
+            ></button>
             <p class="profile__span-subheading">Explorer</p>
           </div>
           <button type="button" class="profile__add-button"></button>
@@ -108,9 +112,9 @@
         <p class="footer__copy">&copy; 2024 Sara Raz</p>
       </footer>
     </div>
-    <div class="modal">
+    <div class="modal" id="profile__edit-modal">
       <div class="modal__container">
-        <button class="modal__close"></button>
+        <button class="modal__close" id="modal__close-button"></button>
         <h2 class="modal__heading">Edit Profile</h2>
         <form class="modal__form">
           <input type="text" name="name" value="Jacques Cousteau" />

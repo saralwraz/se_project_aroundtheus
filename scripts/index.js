@@ -30,3 +30,17 @@ console.log(initialCards);
 function cardContent() {}
 
 cardContent();
+
+const profileEditButn = document.querySelector("#profile__edit-button");
+const profileEditmodal = document.querySelector("#profile__edit-modal");
+const profileCloseBtn = document.querySelector("#modal__close-button");
+
+function closePopup() {
+  profileEditmodal.classList.remove("modal__opened");
+}
+
+profileEditButn.addEventListener("click", () => {
+  profileEditmodal.classList.add("modal__opened");
+});
+
+profileCloseBtn.addEventListener("click", closePopup);

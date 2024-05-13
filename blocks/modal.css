@@ -39,6 +39,10 @@
   cursor: pointer;
 }
 
+.modal__close:hover {
+  opacity: 0.6;
+}
+
 .modal__heading {
   font-family: Inter, Arial, sans-serif;
   color: #000;
@@ -90,6 +94,10 @@ input[type="text"] {
   color: #fff;
   border-radius: 2px;
   border: none;
+}
+
+.modal__button:hover {
+  opacity: 0.8;
 }
 
 @media screen and (max-width: 620px) {
