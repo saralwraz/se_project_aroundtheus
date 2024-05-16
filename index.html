@@ -27,85 +27,20 @@
             class="profile__avatar"
           />
           <div class="profile__info">
-            <h1 class="profile__name">Jacques Cousteau</h1>
+            <h1 class="profile__name" id="profile__name">Jacques Cousteau</h1>
             <button
               type="button"
               class="profile__edit-button"
               id="profile__edit-button"
             ></button>
-            <p class="profile__span-subheading">Explorer</p>
+            <p class="profile__span-subheading" id="profile__subheading">
+              Explorer
+            </p>
           </div>
           <button type="button" class="profile__add-button"></button>
         </section>
         <section class="cards page__section">
-          <ul class="cards__list">
-            <li class="card">
-              <img
-                src=".//images/yosemite-valley.jpg"
-                alt="Yosemite Valley"
-                class="card__image"
-              />
-              <div class="card__name">
-                <h2 class="card__text">Yosemite Valley</h2>
-                <button type="button" class="card__heart"></button>
-              </div>
-            </li>
-            <li class="card">
-              <img
-                src=".//images/lake-louise.png"
-                alt="Lake Louise"
-                class="card__image"
-              />
-              <div class="card__name">
-                <h2 class="card__text">Lake Louise</h2>
-                <button type="button" class="card__heart"></button>
-              </div>
-            </li>
-            <li class="card">
-              <img
-                src=".//images/bald-mountains.png"
-                alt="Bald Mountains"
-                class="card__image"
-              />
-              <div class="card__name">
-                <h2 class="card__text">Bald Mountains</h2>
-                <button type="button" class="card__heart"></button>
-              </div>
-            </li>
-            <li class="card">
-              <img
-                src=".//images/latemar.png"
-                alt="Latemar"
-                class="card__image"
-              />
-              <div class="card__name">
-                <h2 class="card__text">Latemar</h2>
-                <button type="button" class="card__heart"></button>
-              </div>
-            </li>
-            <li class="card">
-              <img
-                src=".//images/vanoise-national-park.png"
-                alt="Vanoise National Park"
-                class="card__image"
-              />
-              <div class="card__name">
-                <h2 class="card__text">Vanoise National Park</h2>
-                <button type="button" class="card__heart"></button>
-              </div>
-            </li>
-            <li class="card">
-              <img
-                src=".//images/lago-di-braies.png"
-                alt="Lago di Braies"
-                class="card__image"
-              />
-              <div class="card__name">
-                <h2 class="card__text">Lago di Braies</h2>
-                <button type="button" class="card__heart"></button>
-              </div>
-            </li>
-          </ul>
+          <ul class="cards__list"></ul>
         </section>
       </main>
       <footer class="footer page__section">
@@ -116,13 +51,32 @@
       <div class="modal__container">
         <button class="modal__close" id="modal__close-button"></button>
         <h2 class="modal__heading">Edit Profile</h2>
-        <form class="modal__form">
-          <input type="text" name="name" value="Jacques Cousteau" />
-          <input type="text" name="subheading" value="Explorer" />
+        <form class="modal__form" id="modal__form">
+          <input
+            type="text"
+            name="name"
+            id="modal__name"
+            value="Jacques Cousteau"
+          />
+          <input
+            type="text"
+            name="subheading"
+            id="modal__subheading"
+            value="Explorer"
+          />
           <button class="modal__button">Save</button>
         </form>
       </div>
     </div>
+    <template id="card__template">
+      <li class="card">
+        <img src="" alt="" class="card__image" />
+        <div class="card__name">
+          <h2 class="card__text">y</h2>
+          <button type="button" class="card__heart"></button>
+        </div>
+      </li>
+    </template>
     <script src="./scripts/index.js"></script>
   </body>
 </html>
