@@ -1,27 +1,27 @@
 const initialCards = [
   {
     name: "Ein Gedi, Israel",
-    link: "https://unsplash.com/photos/boulder-beside-on-valley-and-bushes-VkZuNpXxdIg",
+    link: "https://images.unsplash.com/photo-1464979834326-b695d5e187e6?q=80&w=2970&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
     name: "Niagara Falls, NY",
-    link: "https://unsplash.com/photos/people-standing-on-cliff-near-waterfalls-during-daytime-61R8AY9YK0Q",
+    link: "https://images.unsplash.com/photo-1604896777674-cd6d245567b3?q=80&w=1920&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
     name: "Jim Thorpe, PA",
-    link: "https://unsplash.com/photos/green-and-brown-trees-during-daytime-MI5Xiovb-JI",
+    link: "https://images.unsplash.com/photo-1603634751673-d47ba782e292?q=80&w=3570&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
     name: "Versailles, France",
-    link: "https://unsplash.com/photos/green-grass-field-with-trees-3Om3gtbgmiM",
+    link: "https://images.unsplash.com/photo-1615107306244-be271e8b1407?q=80&w=3000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
     name: "Everglades, FL",
-    link: "https://unsplash.com/photos/a-wooden-walkway-in-the-middle-of-a-forest-d1ekw-GUvn4",
+    link: "https://images.unsplash.com/photo-1705988009712-70c4f2a4b0e4?q=80&w=3570&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
     name: "Golan Heights, Israel",
-    link: "https://unsplash.com/photos/yellow-petaled-flower-field-at-daytime-g_Abgn1slAM",
+    link: "https://images.unsplash.com/photo-1554558424-4a02a6451c4b?q=80&w=3655&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
 ];
 
@@ -39,12 +39,29 @@ const profileTitle = document.querySelector("#profile__name");
 const profileDescription = document.querySelector("#profile__subheading");
 
 const profileEditForm = document.querySelector("#modal__form");
+const cardListEl = document.querySelector(".cards__list");
 const nameInput = document.querySelector("#modal__name");
 const jobInput = document.querySelector("#modal__subheading");
+
+const cardTemplate =
+  document.querySelector("#card__template").content.firstElementChild;
 
 //* Functions *//
 function closePopup() {
   profileEditModal.classList.remove("modal__opened");
+}
+
+function getCardElement(cardData) {
+  const cardElement = cardTemplate.cloneNode(true);
+  const cardNameEl = cardElement.querySelector(".card__name");
+  const cardImageEl = cardElement.querySelector(".card__image");
+  cardNameEl.textContent = cardData.name;
+
+  cardImageEl.src = cardData.link;
+  cardImageEl.alt = cardData.name;
+  cardNameEl.textContent = cardData.name;
+
+  return cardElement;
 }
 
 //*Event Handlers*//
@@ -65,3 +82,8 @@ profileEditBtn.addEventListener("click", () => {
 profileCloseBtn.addEventListener("click", closePopup);
 
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
+
+initialCards.forEach((cardData) => {
+  const cardElement = getCardElement(cardData);
+  cardListEl.prepend(cardElement);
+});
