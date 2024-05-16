@@ -53,7 +53,7 @@ function closePopup() {
 
 function getCardElement(cardData) {
   const cardElement = cardTemplate.cloneNode(true);
-  const cardNameEl = cardElement.querySelector(".card__name");
+  const cardNameEl = cardElement.querySelector(".card__text");
   const cardImageEl = cardElement.querySelector(".card__image");
   cardNameEl.textContent = cardData.name;
 
