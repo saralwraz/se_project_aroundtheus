@@ -25,12 +25,6 @@ const initialCards = [
   },
 ];
 
-console.log(initialCards);
-
-function cardContent() {}
-
-cardContent();
-
 //* Elements *//
 const profileEditBtn = document.querySelector("#profile__edit-button");
 const profileEditModal = document.querySelector("#profile__edit-modal");
@@ -48,7 +42,7 @@ const cardTemplate =
 
 //* Functions *//
 function closePopup() {
-  profileEditModal.classList.remove("modal__opened");
+  profileEditModal.classList.remove("modal_opened");
 }
 
 function getCardElement(cardData) {
@@ -71,12 +65,11 @@ function handleProfileEditSubmit(e) {
   profileTitle.textContent = nameInput.value;
   profileDescription.textContent = jobInput.value;
   closePopup();
-  console.log("form submitted");
 }
 
 //* Event Listeners *//
 profileEditBtn.addEventListener("click", () => {
-  profileEditModal.classList.add("modal__opened");
+  profileEditModal.classList.add("modal_opened");
 });
 
 profileCloseBtn.addEventListener("click", closePopup);
