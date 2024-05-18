@@ -21,7 +21,7 @@
   box-sizing: border-box;
   position: relative;
   margin: auto;
-  padding: 36px;
+  padding: 34px 36px;
   border-radius: 10px;
   box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.15);
 }
@@ -31,7 +31,7 @@
   border: none;
   background-color: transparent;
   position: absolute;
-  top: -35px;
+  top: -55px;
   right: -45px;
   width: 40px;
   height: 40px;
@@ -60,6 +60,7 @@
   gap: 29.74px;
   border-radius: 1px;
   max-width: 358px;
+  width: 100%;
 }
 
 .modal__form-input {
@@ -104,8 +105,8 @@
 
   .modal__close {
     right: 0;
-    width: 26px;
-    height: 26px;
+    max-height: 26px;
+    max-width: 26px;
   }
 
   .modal__heading {
