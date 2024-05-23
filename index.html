@@ -47,26 +47,27 @@
         <p class="footer__copy">&copy; 2024 Sara Raz</p>
       </footer>
     </div>
+    <!-- Edit Card Modal --->
     <div class="modal" id="profile__edit-modal">
       <div class="modal__container">
         <button
           class="modal__close"
           type="button"
-          id="modal__close-button"
+          id="profile__close-button"
         ></button>
         <h2 class="modal__heading">Edit Profile</h2>
         <form class="modal__form" id="modal__form">
           <input
             type="text"
             name="modal__input_type_name"
-            id="modal__name"
+            id="profile__name-input"
             class="modal__form-input"
             value="Jacques Cousteau"
           />
           <input
             type="text"
             name="modal__input_type_description"
-            id="modal__subheading"
+            id="profile__subheading-input"
             class="modal__form-input"
             value="Explorer"
           />
@@ -74,9 +75,50 @@
         </form>
       </div>
     </div>
+    <!-- Add a Card Modal -->
+    <div class="modal" id="profile__add-card-modal">
+      <div class="modal__container">
+        <button
+          class="modal__close"
+          type="button"
+          id="add-card__close-button"
+        ></button>
+        <h2 class="modal__heading">New Place</h2>
+        <form class="modal__form" id="addcard__form">
+          <input
+            type="text"
+            name="modal__input_type_title"
+            id="add-card-title-input"
+            class="modal__form-input"
+            placeholder="Title"
+          />
+          <input
+            type="text"
+            name="modal__input_type_link"
+            id="add-card-link-input"
+            class="modal__form-input"
+            placeholder="Image link"
+          />
+          <button class="modal__button" type="submit">Create</button>
+        </form>
+      </div>
+    </div>
+    <!--Open Image Modal-->
+    <div class="modal" id="card_modal">
+      <div class="modal__container">
+        <button
+          class="modal__close"
+          type="button"
+          id="profile__close-button"
+        ></button>
+        <img src="" alt="" class="card__image_open" />
+        <p class="modal__caption"></p>
+      </div>
+    </div>
     <template id="card__template">
       <li class="card">
         <img src="" alt="" class="card__image" />
+        <button type="button" class="card__trashcan"></button>
         <div class="card__name">
           <h2 class="card__text"></h2>
           <button type="button" class="card__heart"></button>

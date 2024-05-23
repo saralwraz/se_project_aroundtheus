@@ -36,14 +36,40 @@
   padding-bottom: 0;
 }
 
+.card__image_open {
+  max-width: 75vw;
+  max-height: 75vh;
+}
+
 .card__heart {
-  background: transparent url(../images/heart.svg) center no-repeat;
+  background: url(../images/heart.svg);
   width: 21px;
   height: 18px;
   border: none;
 }
 
+.card__heart_active {
+  background: url(../images/filledheart.svg);
+}
+
 .card__heart:hover {
   cursor: pointer;
   opacity: 50%;
+}
+
+.card__trashcan {
+  background: transparent url(../images/trashcan.svg);
+  border: none;
+  position: absolute;
+  width: 18px;
+  height: 19.3px;
+  display: flex;
+  align-self: flex-end;
+  margin-top: 18px;
+  margin-right: 15px;
+}
+
+.card__trashcan:hover {
+  cursor: pointer;
+  opacity: 60%;
 }
