@@ -36,11 +36,6 @@
   padding-bottom: 0;
 }
 
-.card__image_open {
-  max-width: 75vw;
-  max-height: 75vh;
-}
-
 .card__heart {
   background: url(../images/heart.svg);
   width: 21px;

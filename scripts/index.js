@@ -41,6 +41,13 @@ const cardListEl = document.querySelector(".cards__list");
 const nameInput = document.querySelector("#profile__name-input");
 const jobInput = document.querySelector("#profile__subheading-input");
 
+const previewPictureModal = document.querySelector("#card_modal");
+const previewPictureCloseButton = document.querySelector(
+  "#photo__close-button"
+);
+const modalImage = previewPictureModal.querySelector(".modal__image_open");
+const modalCaption = previewPictureModal.querySelector(".modal__caption");
+
 const cardTemplate =
   document.querySelector("#card__template").content.firstElementChild;
 
@@ -49,19 +56,15 @@ const addCardModal = document.querySelector("#profile__add-card-modal");
 
 //* Functions *//
 function closePopup(modal) {
-  modal.classList.remove("modal_opened");
+  if (modal) {
+    modal.classList.remove("modal_opened");
+  }
 }
 
 function openModal(modal) {
-  modal.classList.add("modal_opened");
-}
-
-function openModal(modal) {
-  modal.classList.add("card__image_open");
-}
-
-function closePopup(modal) {
-  modal.classList.remove("card__image_open");
+  if (modal) {
+    modal.classList.add("modal_opened");
+  }
 }
 
 function getCardElement(cardData) {
@@ -72,12 +75,19 @@ function getCardElement(cardData) {
 
   cardImageEl.src = cardData.link;
   cardImageEl.alt = cardData.name;
-  cardNameEl.textContent = cardData.name;
+
+  // Add event listener for opening image in modal
+  cardImageEl.addEventListener("click", () => {
+    modalImage.src = cardData.link;
+    modalImage.alt = cardData.name;
+    modalCaption.textContent = cardData.name;
+    openModal(previewPictureModal);
+  });
 
   return cardElement;
 }
 
-//*Event Handlers*//
+//* Event Handlers *//
 function handleProfileEditSubmit(e) {
   e.preventDefault();
   profileTitle.textContent = nameInput.value;
@@ -121,25 +131,12 @@ initialCards.forEach((cardData) => {
   cardListEl.prepend(cardElement);
 });
 
-const likeButtons = document.querySelectorAll(".card__heart");
-
-likeButtons.forEach((likeButton) => {
-  likeButton.addEventListener("click", () => {
-    likeButton.classList.toggle("card__heart_active");
-  });
+previewPictureCloseButton.addEventListener("click", () => {
+  closePopup(previewPictureModal);
 });
 
-const cardTrashcans = document.querySelectorAll(".card__trashcan");
-
-cardTrashcans.forEach((trashcan) => {
-  trashcan.addEventListener("click", () => {
-    const card = trashcan.closest(".card");
-    if (card) {
-      card.remove();
-    }
-  });
-});
-
-document.querySelectorAll(".card__image").forEach((image) => {
-  image.addEventListener("click", previewImageModal);
+previewPictureModal.addEventListener("click", (event) => {
+  if (event.target === previewPictureModal) {
+    closePopup(previewPictureModal);
+  }
 });
