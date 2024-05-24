@@ -71,6 +71,7 @@ function getCardElement(cardData) {
   const cardElement = cardTemplate.cloneNode(true);
   const cardNameEl = cardElement.querySelector(".card__text");
   const cardImageEl = cardElement.querySelector(".card__image");
+  const likeButton = cardElement.querySelector(".card__heart");
   cardNameEl.textContent = cardData.name;
 
   cardImageEl.src = cardData.link;
@@ -81,6 +82,10 @@ function getCardElement(cardData) {
     modalImage.alt = cardData.name;
     modalCaption.textContent = cardData.name;
     openModal(previewPictureModal);
+  });
+
+  likeButton.addEventListener("click", () => {
+    likeButton.classList.toggle("card__heart_active");
   });
 
   return cardElement;
