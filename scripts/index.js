@@ -76,7 +76,6 @@ function getCardElement(cardData) {
   cardImageEl.src = cardData.link;
   cardImageEl.alt = cardData.name;
 
-  // Add event listener for opening image in modal
   cardImageEl.addEventListener("click", () => {
     modalImage.src = cardData.link;
     modalImage.alt = cardData.name;
@@ -122,6 +121,13 @@ addCardCloseBtn.addEventListener("click", () => {
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 addCardForm.addEventListener("submit", handleAddCardSubmit);
 
+cardListEl.addEventListener("click", function (event) {
+  if (event.target.classList.contains("card__trashcan")) {
+    const cardToRemove = event.target.closest(".card");
+    cardToRemove.remove();
+  }
+});
+
 addCardButton.addEventListener("click", () => {
   openModal(addCardModal);
 });
@@ -139,4 +145,11 @@ previewPictureModal.addEventListener("click", (event) => {
   if (event.target === previewPictureModal) {
     closePopup(previewPictureModal);
   }
+});
+
+deleteButton.forEach((button) => {
+  button.addEventListener("click", () => {
+    const cardToRemove = button.closest(".card");
+    cardToRemove.remove();
+  });
 });
