@@ -152,6 +152,7 @@ previewPictureModal.addEventListener("click", (event) => {
   }
 });
 
+const deleteButton = document.querySelectorAll(".card__trashcan");
 deleteButton.forEach((button) => {
   button.addEventListener("click", () => {
     const cardToRemove = button.closest(".card");
