@@ -72,8 +72,9 @@ function getCardElement(cardData) {
   const cardNameEl = cardElement.querySelector(".card__text");
   const cardImageEl = cardElement.querySelector(".card__image");
   const likeButton = cardElement.querySelector(".card__heart");
-  cardNameEl.textContent = cardData.name;
+  const deleteButton = cardElement.querySelector(".card__trashcan");
 
+  cardNameEl.textContent = cardData.name;
   cardImageEl.src = cardData.link;
   cardImageEl.alt = cardData.name;
 
@@ -86,6 +87,10 @@ function getCardElement(cardData) {
 
   likeButton.addEventListener("click", () => {
     likeButton.classList.toggle("card__heart_active");
+  });
+
+  deleteButton.addEventListener("click", () => {
+    cardElement.remove();
   });
 
   return cardElement;
@@ -101,13 +106,17 @@ function handleProfileEditSubmit(e) {
 
 function handleAddCardSubmit(e) {
   e.preventDefault();
+  const form = e.target;
   const cardData = {
-    name: document.querySelector("#add-card-title-input").value,
-    link: document.querySelector("#add-card-link-input").value,
+    name: form.querySelector("#add-card-title-input").value,
+    link: form.querySelector("#add-card-link-input").value,
   };
   const cardElement = getCardElement(cardData);
   cardListEl.prepend(cardElement);
   closePopup(addCardModal);
+
+  // Reset the form
+  form.reset();
 }
 
 //* Event Listeners *//
@@ -126,13 +135,6 @@ addCardCloseBtn.addEventListener("click", () => {
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 addCardForm.addEventListener("submit", handleAddCardSubmit);
 
-cardListEl.addEventListener("click", function (event) {
-  if (event.target.classList.contains("card__trashcan")) {
-    const cardToRemove = event.target.closest(".card");
-    cardToRemove.remove();
-  }
-});
-
 addCardButton.addEventListener("click", () => {
   openModal(addCardModal);
 });
@@ -150,12 +152,4 @@ previewPictureModal.addEventListener("click", (event) => {
   if (event.target === previewPictureModal) {
     closePopup(previewPictureModal);
   }
-});
-
-const deleteButton = document.querySelectorAll(".card__trashcan");
-deleteButton.forEach((button) => {
-  button.addEventListener("click", () => {
-    const cardToRemove = button.closest(".card");
-    cardToRemove.remove();
-  });
 });
