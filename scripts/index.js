@@ -156,14 +156,11 @@ previewPictureCloseButton.addEventListener("click", () => {
   closePopup(previewPictureModal);
 });
 
-previewPictureModal.addEventListener("click", (event) => {
-  if (event.target === previewPictureModal) {
-    closePopup(previewPictureModal);
-  }
-});
-
-openModals.addEventListener("click", (event) => {
-  if (event.target === modal) {
-    closePopup(openModals);
-  }
+const modals = document.querySelectorAll(".modal");
+modals.forEach((modal) => {
+  modal.addEventListener("click", (event) => {
+    if (!modal.querySelector(".modal__container").contains(event.target)) {
+      closePopup(modal);
+    }
+  });
 });

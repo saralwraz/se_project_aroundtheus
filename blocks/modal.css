@@ -100,6 +100,7 @@
   font-size: 14px;
   line-height: 16.94px;
   padding-bottom: 13.26px;
+  width: 100%;
 }
 
 .modal__form-input-error {
@@ -119,6 +120,7 @@
   color: #fff;
   border-radius: 2px;
   border: none;
+  margin-top: 20px;
 }
 
 .modal__button:hover {
