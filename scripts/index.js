@@ -59,11 +59,20 @@ function closePopup(modal) {
   if (modal) {
     modal.classList.remove("modal_opened");
   }
+  document.removeEventListener("keydown", handleEscapeKey);
 }
 
 function openModal(modal) {
   if (modal) {
     modal.classList.add("modal_opened");
+    document.addEventListener("keydown", handleEscapeKey);
+  }
+}
+
+function handleEscapeKey(event) {
+  if (event.key === "Escape") {
+    const openModals = document.querySelectorAll(".modal_opened");
+    openModals.forEach((modal) => closePopup(modal));
   }
 }
 
@@ -115,7 +124,6 @@ function handleAddCardSubmit(e) {
   cardListEl.prepend(cardElement);
   closePopup(addCardModal);
 
-  // Reset the form
   form.reset();
 }
 
@@ -152,4 +160,13 @@ previewPictureModal.addEventListener("click", (event) => {
   if (event.target === previewPictureModal) {
     closePopup(previewPictureModal);
   }
+});
+
+document.addEventListener("click", (event) => {
+  const openModals = document.querySelectorAll(".modal_opened");
+  openModals.forEach((modal) => {
+    if (event.target === modal) {
+      closePopup(modal);
+    }
+  });
 });
