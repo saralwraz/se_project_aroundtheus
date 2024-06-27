@@ -69,6 +69,7 @@
 
 .modal__form {
   display: flex;
+  position: relative;
   flex-direction: column;
   margin: 54px 0 0;
   gap: 29.74px;
@@ -132,13 +133,17 @@
 }
 
 .modal__error {
-  visibility: none;
+  visibility: hidden;
+  position: absolute;
+  display: block;
+  padding: 0;
   font-family: Inter, Arial, sans-serif;
   color: #ff0000;
   font-size: 12px;
   font-weight: 400;
   line-height: 14.52px;
   text-align: left;
+  margin-top: 5px;
   transition: opacity 0.03s;
 }
 
