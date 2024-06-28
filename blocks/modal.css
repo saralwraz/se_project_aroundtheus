@@ -71,7 +71,7 @@
   display: flex;
   position: relative;
   flex-direction: column;
-  margin: 54px 0 0;
+  margin: 41px 0 0;
   gap: 29.74px;
   border-radius: 1px;
   max-width: 358px;
@@ -99,8 +99,12 @@
   font-weight: 400;
   font-size: 14px;
   line-height: 16.94px;
-  padding-bottom: 13.26px;
+  padding-bottom: 13.04px;
   width: 100%;
+}
+
+.modal__form-input:last-of-type {
+  margin-top: 17px;
 }
 
 .modal__form-input-error {
