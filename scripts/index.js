@@ -156,7 +156,7 @@ previewPictureCloseButton.addEventListener("click", () => {
   closePopup(previewPictureModal);
 });
 
-const modals = document.querySelectorAll(".modal");
+const modals = document.querySelectorAll(".modal #card__modal");
 modals.forEach((modal) => {
   modal.addEventListener("click", (event) => {
     if (!modal.querySelector(".modal__container").contains(event.target)) {
