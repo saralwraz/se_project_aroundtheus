@@ -158,8 +158,8 @@ previewPictureCloseButton.addEventListener("click", () => {
 
 const modals = document.querySelectorAll(".modal");
 modals.forEach((modal) => {
-  modal.addEventListener("click", (event) => {
-    if (!modal.querySelector(".modal__container").contains(event.target)) {
+  modal.addEventListener("click", (evt) => {
+    if (evt.target.classList.contains("modal")) {
       closePopup(modal);
     }
   });
