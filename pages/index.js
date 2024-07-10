@@ -1,4 +1,5 @@
 import Card from "../components/Card.js";
+import FormValidator from "../components/FormValidator.js";
 
 const initialCards = [
   {
@@ -30,6 +31,15 @@ const initialCards = [
 const cardData = {
   name: "Ein Gedi, Israel",
   link: "https://images.unsplash.com/photo-1464979834326-b695d5e187e6?q=80&w=2970&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+};
+
+const config = {
+  formSelector: ".modal__form",
+  inputSelector: ".modal__form-input",
+  submitButtonSelector: ".modal__button",
+  inactiveButtonClass: "modal__button_disabled",
+  inputErrorClass: "modal__form-input-error",
+  errorClass: "modal__error_visible",
 };
 
 //* Elements *//
@@ -161,3 +171,9 @@ modals.forEach((modal) => {
     }
   });
 });
+
+const profileFormValidator = new FormValidator(config, profileEditForm);
+profileFormValidator.enableValidation();
+
+const addCardFormValidator = new FormValidator(config, addCardForm);
+addCardFormValidator.enableValidation();
