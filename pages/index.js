@@ -70,7 +70,6 @@ function handleImageClick(name, link) {
   modalImage.alt = name;
   modalCaption.textContent = name;
 
-  previewPictureModal.classList.add("modal_opened");
   document.addEventListener("keydown", handleEscapeKey);
 }
 
