@@ -138,6 +138,13 @@
   cursor: none;
 }
 
+.modal__button_disabled:hover {
+  border-radius: 2px;
+  border: 1px #000 solid;
+  opacity: 0.2;
+  cursor: none;
+}
+
 .modal__error {
   visibility: hidden;
   position: absolute;

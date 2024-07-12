@@ -28,11 +28,6 @@ const initialCards = [
   },
 ];
 
-const cardData = {
-  name: "Ein Gedi, Israel",
-  link: "https://images.unsplash.com/photo-1464979834326-b695d5e187e6?q=80&w=2970&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-};
-
 const config = {
   formSelector: ".modal__form",
   inputSelector: ".modal__form-input",
@@ -65,13 +60,20 @@ const previewPictureCloseButton = document.querySelector(
 const modalImage = previewPictureModal.querySelector(".modal__image_open");
 const modalCaption = previewPictureModal.querySelector(".modal__caption");
 
-const cardTemplate =
-  document.querySelector("#card__template").content.firstElementChild;
-
 const addCardButton = document.querySelector(".profile__add-button");
 const addCardModal = document.querySelector("#profile__add-card-modal");
 
 //* Functions *//
+
+function handleImageClick(name, link) {
+  modalImage.src = link;
+  modalImage.alt = name;
+  modalCaption.textContent = name;
+
+  previewPictureModal.classList.add("modal_opened");
+  document.addEventListener("keydown", handleEscapeKey);
+}
+
 function closePopup(modal) {
   if (modal) {
     modal.classList.remove("modal_opened");
@@ -93,23 +95,15 @@ function handleEscapeKey(event) {
   }
 }
 
-function getCardElement(cardData) {
-  const cardElement = cardTemplate.cloneNode(true);
-  const cardNameEl = cardElement.querySelector(".card__text");
-  const cardImageEl = cardElement.querySelector(".card__image");
-
-  cardNameEl.textContent = cardData.name;
-  cardImageEl.src = cardData.link;
-  cardImageEl.alt = cardData.name;
-
-  cardImageEl.addEventListener("click", () => {
-    modalImage.src = cardData.link;
-    modalImage.alt = cardData.name;
-    modalCaption.textContent = cardData.name;
-    openModal(previewPictureModal);
-  });
-
+function createCard(cardData) {
+  const card = new Card(cardData, "#card__template", handleImageClick);
+  const cardElement = card.getView();
   return cardElement;
+}
+
+function renderCard(cardData, wrapper) {
+  const cardElement = createCard(cardData);
+  wrapper.prepend(cardElement);
 }
 
 //* Event Handlers *//
@@ -127,8 +121,7 @@ function handleAddCardSubmit(e) {
     name: form.querySelector("#add-card-title-input").value,
     link: form.querySelector("#add-card-link-input").value,
   };
-  const cardElement = getCardElement(cardData);
-  cardListEl.prepend(cardElement);
+  renderCard(cardData, cardListEl);
   closePopup(addCardModal);
 
   form.reset();
@@ -155,8 +148,7 @@ addCardButton.addEventListener("click", () => {
 });
 
 initialCards.forEach((cardData) => {
-  const cardElement = getCardElement(cardData);
-  cardListEl.prepend(cardElement);
+  renderCard(cardData, cardListEl);
 });
 
 previewPictureCloseButton.addEventListener("click", () => {

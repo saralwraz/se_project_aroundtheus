@@ -17,17 +17,20 @@ export default class Card {
 
     this._element
       .querySelector(".card__image")
-      .addEventListener("click", () => this._handleImageClick(this));
+      .addEventListener("click", () =>
+        this._handleImageClick(this._name, this._link)
+      );
   }
 
   _handleLikeIcon() {
     this._element
       .querySelector(".card__heart")
-      .classList.toggle(".card__heart_active");
+      .classList.toggle("card__heart_active");
   }
 
   _handleDeleteCard() {
     this._element.remove();
+    this._element = null;
   }
 
   _getTemplate() {
@@ -39,8 +42,10 @@ export default class Card {
 
   getView() {
     this._element = this._getTemplate();
-    this._element.querySelector(".card__image").alt = this.name;
-    this._element.querySelector(".card__title").textContent = this.name;
+    const cardImage = this._element.querySelector(".card__image");
+    cardImage.src = this._link;
+    cardImage.alt = this._name;
+    this._element.querySelector(".card__text").textContent = this._name;
 
     this._setEventListeners();
 
