@@ -46,7 +46,7 @@ const addCardCloseBtn = document.querySelector("#add-card__close-button");
 const profileTitle = document.querySelector("#profile__name");
 const profileDescription = document.querySelector("#profile__subheading");
 
-const profileEditForm = document.querySelector("#profile__edit-modal");
+const profileEditForm = document.querySelector("#profileEditForm");
 const addCardForm = document.querySelector("#addcard__form");
 const cardListEl = document.querySelector(".cards__list");
 
@@ -128,6 +128,7 @@ function handleAddCardSubmit(e) {
 }
 
 //* Event Listeners *//
+
 profileEditBtn.addEventListener("click", () => {
   openModal(profileEditModal);
 });
