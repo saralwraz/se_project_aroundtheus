@@ -1,18 +1,11 @@
 {
-    "name": "tripleten",
-    "version": "0.0.1",
-    "description": "Educational platform",
-    "main": "index.js",
-    "scripts": {
-      "build": "rm -rf dist && webpack --mode production",
-      "dev": "webpack serve --mode development"
-    },
-    "keywords": [],
-    "author": "Sara Raz",
-    "license": "ISC",
-    "devDependencies":
-      "webpack": "5.76.0",
-      "webpack-cli": "4.10.0",
-      "webpack-dev-server": "4.9.3"
-    
-  }
+  "name": "se_project_aroundtheus",
+  "version": "1.0.0",
+  "description": "around the us project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "sara raz",
+  "license": "ISC"
+}
