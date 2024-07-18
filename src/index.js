@@ -168,3 +168,9 @@ profileFormValidator.enableValidation();
 
 const addCardFormValidator = new FormValidator(config, addCardForm);
 addCardFormValidator.enableValidation();
+
+const numbers = [2, 3, 5];
+
+const doubledNumbers = numbers.map((number) => number * 2);
+
+console.log(doubledNumbers);
