@@ -65,11 +65,12 @@ const addCardModal = document.querySelector("#profile__add-card-modal");
 
 //* Functions *//
 
-function openModal(modal) {
-  if (modal) {
-    modal.classList.add("modal_opened");
-    document.addEventListener("keydown", handleEscapeKey);
-  }
+function handleImageClick(name, link) {
+  modalImage.src = link;
+  modalImage.alt = name;
+  modalCaption.textContent = name;
+
+  document.addEventListener("keydown", handleEscapeKey);
 }
 
 function closePopup(modal) {
@@ -79,11 +80,11 @@ function closePopup(modal) {
   document.removeEventListener("keydown", handleEscapeKey);
 }
 
-function handleImageClick(name, link) {
-  modalImage.src = link;
-  modalImage.alt = name;
-  modalCaption.textContent = name;
-  openModal(previewPictureModal);
+function openModal(modal) {
+  if (modal) {
+    modal.classList.add("modal_opened");
+    document.addEventListener("keydown", handleEscapeKey);
+  }
 }
 
 function handleEscapeKey(event) {
