@@ -84,10 +84,3 @@ function handleAddCardSubmit(e) {
 function handleImageClick(name, link) {
   previewImagePopup.open({ name, link });
 }
-
-//Validations
-
-const addCardFormValidator = new FormValidator(config, addCardForm);
-addCardFormValidator.enableValidation();
-const profileEditFormValidator = new FormValidator(config, profileEditForm);
-profileEditFormValidator.enableValidation();
