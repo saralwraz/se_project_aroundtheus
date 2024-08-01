@@ -87,7 +87,7 @@ function handleProfileEditSubmit(profileData) {
 function handleAddCardSubmit(newCardData) {
   const name = newCardData.title;
   const link = newCardData.url;
-  renderCard({ name, link });
+  renderer({ name, link });
   addCardPopup.close();
 }
 
