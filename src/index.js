@@ -50,6 +50,7 @@ const cardSection = new Section(
 );
 
 // Card render
+
 cardSection.renderItems();
 
 // FormValidator
@@ -77,9 +78,9 @@ previewPictureCloseButton.addEventListener("click", () => {
 
 // Event handler functions
 function handleProfileEditSubmit(profileData) {
-  const name = profileData.title;
-  const description = profileData.subheader;
-  userInfo.setUserInfo(name, description);
+  const name = profileData.modal__input_type_name;
+  const about = profileData.modal__input_type_description;
+  userInfo.setUserInfo(name, about);
   profileEditPopup.close();
 }
 
