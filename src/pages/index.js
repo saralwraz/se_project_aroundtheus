@@ -17,14 +17,11 @@ const profileDescriptionInput = document.querySelector(
 const profileEditBtn = document.querySelector("#profile__edit-button");
 const addCardForm = document.querySelector("#addcard__form");
 const addCardButton = document.querySelector(".profile__add-button");
-const previewPictureCloseButton = document.querySelector(
-  "#photo__close-button"
-);
 
 // User info
 const userInfo = new UserInfo("#profile__name", "#profile__subheading");
 
-// PopupWithForm
+// Popup instances
 const profileEditPopup = new PopupWithForm(
   "#profile__edit-modal",
   handleProfileEditSubmit
@@ -33,31 +30,19 @@ const addCardPopup = new PopupWithForm(
   "#profile__add-card-modal",
   handleAddCardSubmit
 );
-
-// PopupWithImage
 const previewImagePopup = new PopupWithImage("#card_modal");
 
-// Section
-const renderer = (item) => {
-  const card = new Card(item, "#card__template", handleImageClick);
-  const cardElement = card.getView();
-  cardSection.addItem(cardElement);
-};
-
+// Section instance
 const cardSection = new Section(
   { items: initialCards, renderer },
   ".cards__list"
 );
-
-// Card render
-
 cardSection.renderItems();
 
-// FormValidator
+// Form validators
 const profileEditFormValidator = new FormValidator(config, profileEditForm);
-profileEditFormValidator.enableValidation();
-
 const addCardFormValidator = new FormValidator(config, addCardForm);
+profileEditFormValidator.enableValidation();
 addCardFormValidator.enableValidation();
 
 // Event Listeners
@@ -68,29 +53,30 @@ profileEditBtn.addEventListener("click", () => {
   profileEditPopup.open();
 });
 
-addCardButton.addEventListener("click", () => {
-  addCardPopup.open();
-});
-
-previewPictureCloseButton.addEventListener("click", () => {
-  previewImagePopup.close();
-});
+addCardButton.addEventListener("click", () => addCardPopup.open());
 
 // Event handler functions
 function handleProfileEditSubmit(profileData) {
-  const name = profileData.modal__input_type_name;
-  const about = profileData.modal__input_type_description;
+  const { modal__input_type_name: name, modal__input_type_description: about } =
+    profileData;
   userInfo.setUserInfo(name, about);
   profileEditPopup.close();
 }
 
 function handleAddCardSubmit(newCardData) {
-  const name = newCardData.title;
-  const link = newCardData.url;
+  const { title: name, url: link } = newCardData;
+  console.log("New Card Data:", { name, link });
   renderer({ name, link });
   addCardPopup.close();
 }
 
 function handleImageClick(name, link) {
   previewImagePopup.open({ name, link });
+}
+
+// Renderer function
+function renderer(item) {
+  const card = new Card(item, "#card__template", handleImageClick);
+  const cardElement = card.getView();
+  cardSection.addItem(cardElement);
 }
