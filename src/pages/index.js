@@ -21,7 +21,7 @@ const addCardButton = document.querySelector(".profile__add-button");
 // User info
 const userInfo = new UserInfo("#profile__name", "#profile__subheading");
 
-// Popup instances
+// Popup
 const profileEditPopup = new PopupWithForm(
   "#profile__edit-modal",
   handleProfileEditSubmit
@@ -32,7 +32,7 @@ const addCardPopup = new PopupWithForm(
 );
 const previewImagePopup = new PopupWithImage("#card_modal");
 
-// Section instance
+// Section
 const cardSection = new Section(
   { items: initialCards, renderer },
   ".cards__list"
@@ -55,7 +55,7 @@ profileEditBtn.addEventListener("click", () => {
 
 addCardButton.addEventListener("click", () => addCardPopup.open());
 
-// Event handler functions
+// Event handlers
 function handleProfileEditSubmit(profileData) {
   const { modal__input_type_name: name, modal__input_type_description: about } =
     profileData;
@@ -64,9 +64,7 @@ function handleProfileEditSubmit(profileData) {
 }
 
 function handleAddCardSubmit(newCardData) {
-  const { title: name, url: link } = newCardData;
-  console.log("New Card Data:", { name, link });
-  renderer({ name, link });
+  renderer(newCardData);
   addCardPopup.close();
 }
 
@@ -74,7 +72,7 @@ function handleImageClick(name, link) {
   previewImagePopup.open({ name, link });
 }
 
-// Renderer function
+// Renderer
 function renderer(item) {
   const card = new Card(item, "#card__template", handleImageClick);
   const cardElement = card.getView();
