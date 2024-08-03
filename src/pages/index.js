@@ -72,9 +72,13 @@ function handleImageClick(name, link) {
   previewImagePopup.open({ name, link });
 }
 
-// Renderer
-function renderer(item) {
+// Renderer + Cards
+function createCard(item) {
   const card = new Card(item, "#card__template", handleImageClick);
-  const cardElement = card.getView();
+  return card.getView();
+}
+
+function renderer(item) {
+  const cardElement = createCard(item);
   cardSection.addItem(cardElement);
 }
