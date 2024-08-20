@@ -5,6 +5,7 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import UserInfo from "../components/UserInfo.js";
 import Section from "../components/Section.js";
 import "../pages/index.css";
+import { Api } from "../components/Api.js";
 import { initialCards, config } from "../utils/constants.js";
 
 // Constants
@@ -82,3 +83,18 @@ function renderer(item) {
   const cardElement = createCard(item);
   cardSection.addItem(cardElement);
 }
+
+//API
+
+api.getInitialCards().then((result) => {
+  console.log(result);
+});
+
+api
+  .getProfile()
+  .then((userData) => {
+    console.log(userData);
+  })
+  .catch((err) => {
+    console.error("Failed to load user information:", err);
+  });

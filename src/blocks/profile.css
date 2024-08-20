@@ -77,6 +77,10 @@
   margin-right: 24px;
 }
 
+.profile__avatar:hover {
+  opacity: 0.2;
+}
+
 @media screen and (max-width: 775px) {
   .profile__name {
     font-size: 35px;
