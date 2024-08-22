@@ -139,11 +139,3 @@ export default class Api {
     });
   }
 }
-
-const api = new Api({
-  baseUrl: "https://around-api.en.tripleten-services.com/v1",
-  headers: {
-    authorization: "97f6c77d-7da4-4d93-a50b-608f8d21e24f",
-    "Content-Type": "application/json",
-  },
-});

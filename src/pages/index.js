@@ -2,10 +2,11 @@ import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
+import PopupwithConfirm from "../components/PopupWithConfirm.js";
 import UserInfo from "../components/UserInfo.js";
 import Section from "../components/Section.js";
 import "../pages/index.css";
-import { Api } from "../components/Api.js";
+import Api from "../components/Api.js";
 import { initialCards, config } from "../utils/constants.js";
 
 // Constants
@@ -85,6 +86,14 @@ function renderer(item) {
 }
 
 //API
+
+const api = new Api({
+  baseUrl: "https://around-api.en.tripleten-services.com/v1",
+  headers: {
+    authorization: "97f6c77d-7da4-4d93-a50b-608f8d21e24f",
+    "Content-Type": "application/json",
+  },
+});
 
 api.getInitialCards().then((result) => {
   console.log(result);

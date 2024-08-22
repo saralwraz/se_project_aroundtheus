@@ -75,10 +75,38 @@
   background-position: center;
   border-radius: 50%;
   margin-right: 24px;
+  transition: opacity 0.3s ease;
+}
+
+.hover__profile {
+  position: relative;
+  display: inline-block;
 }
 
 .profile__avatar:hover {
   opacity: 0.2;
+}
+
+.hover__profile::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 24px;
+  height: 24px;
+  background-image: url("../images/edit-pen.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+.hover__profile:hover::after {
+  opacity: 1;
+  justify-content: center;
 }
 
 @media screen and (max-width: 775px) {

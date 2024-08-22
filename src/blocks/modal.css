@@ -31,6 +31,11 @@
   box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.15);
 }
 
+.modal__container-trashcan {
+  width: 430px;
+  height: 181px;
+}
+
 .modal__close {
   background-image: url(../images/closeicon.svg);
   border: none;
