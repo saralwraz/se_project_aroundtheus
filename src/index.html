@@ -6,25 +6,26 @@
     <meta name="author" content="Sara Wenner" />
     <meta name="description" content="Photo gallery of places around the US" />
     <meta name="keywords" content="photos, Jacques Cousteau" />
-
+    <link rel="icon" type="image/x-icon" href="src/images/favicon.ico" />
     <title>Around the US</title>
   </head>
   <body class="page">
     <div class="page__wrapper">
       <header class="header page__section">
         <img
-          src="<%=require('/src/images/aroundtheuslogo.svg')%>"
+          src="%=require('src/images/aroundtheuslogo.svg')%>"
           alt="Around the US logo"
           class="header__logo"
         />
       </header>
       <main class="page__content">
         <section class="profile page__section">
-          <img
-            src="<%=require('/src/images/Avatar.png')%>"
-            alt="Avatar of Jaques Cousteau"
-            class="profile__avatar"
-          />
+          <div class="hover__profile">
+            <img
+              src="%=require('src/images/Avatar.svg')%>"
+              alt="Avatar of Jaques Cousteau"
+              class="profile__avatar"
+            />
           <div class="profile__info">
             <h1 class="profile__name" id="profile__name">Jacques Cousteau</h1>
             <button
@@ -96,6 +97,38 @@
         </form>
       </div>
     </div>
+    <!-- Edit Profile Avatar Modal -->
+    <div class="modal" id="profile__avatar-modal">
+      <div class="modal__container">
+        <button
+          class="modal__close"
+          type="button"
+          id="avatar__close-button"
+        ></button>
+        <h2 class="modal__heading">Change profile picture</h2>
+        <form class="modal__form" id="changeprofile_form">
+          <label for="add-profile-avatar">
+            <input
+              type="url"
+              name="modal__input_type_link"
+              id="avatar-link-input"
+              class="modal__form-input"
+              placeholder="Image link"
+              required
+            />
+            <span class="modal__error" id="add-avatar-link-input-error"></span>
+          </label>
+
+          <button
+            class="modal__button modal__button_disabled"
+            type="submit"
+            disabled
+          >
+            Save
+          </button>
+        </form>
+      </div>
+    </div>
     <!-- Add a Card Modal -->
     <div class="modal" id="profile__add-card-modal">
       <div class="modal__container">
@@ -109,7 +142,7 @@
           <label for="add-card-title-input">
             <input
               type="text"
-              name="name"
+              name="modal__input_type_title"
               id="add-card-title-input"
               class="modal__form-input"
               placeholder="Title"
@@ -123,7 +156,7 @@
           <label for="add-card-link-input">
             <input
               type="url"
-              name="link"
+              name="modal__input_type_link"
               id="add-card-link-input"
               class="modal__form-input"
               placeholder="Image link"
@@ -134,7 +167,6 @@
 
           <button
             class="modal__button modal__button_disabled"
-            id="add-card-button"
             type="submit"
             disabled
           >
@@ -143,7 +175,27 @@
         </form>
       </div>
     </div>
-
+    <!-- Delete Card Modal -->
+    <div class="modal" id="trashcan-modal" novalidate>
+      <div class="modal__container modal__container-trashcan">
+        <button class="modal__close" type="button"></button>
+        <form class="modal__form modal__form-trashcan">
+          <h2 class="modal__heading modal__heading-trashcan">Are you sure?</h2>
+          <button
+            class="card__heart"
+            id="card-heart-like"
+            type="button"
+          ></button>
+        </form>
+        <button
+          class="modal__button modal__button-trash"
+          id="modal-button-trash"
+          type="submit"
+        >
+          Yes
+        </button>
+      </div>
+    </div>
     <!--Open Image Modal-->
     <div class="modal" id="card_modal">
       <div class="modal__image">
@@ -154,47 +206,6 @@
         ></button>
         <img src="" alt="" class="modal__image_open" />
         <p class="modal__caption"></p>
-      </div>
-    </div>
-    <!-- Are you sure? --->
-    <div class="modal" id="areyousure">
-      <div class="modal__container">
-        <button class="modal__close" type="button"></button>
-        <h2 class="modal__heading">Are you sure?</h2>
-        <button class="modal__button" id="yes-button" type="submit">Yes</button>
-      </div>
-    </div>
-    <!-- Change Profile Picture -->
-    <div class="modal" id="change-profile-modal">
-      <div class="modal__container">
-        <button
-          class="modal__close"
-          type="button"
-          id="profile__close-button"
-        ></button>
-        <h2 class="modal__heading">Change profile picture</h2>
-        <form class="modal__form" id="addcard__form">
-          <label for="change-profile-input">
-            <input
-              type="url"
-              name="link"
-              id="change-profile-link-input"
-              class="modal__form-input"
-              placeholder="Input link"
-              required
-            />
-            <span class="modal__error" id="add-card-link-input-error"></span>
-          </label>
-
-          <button
-            class="modal__button modal__button_disabled"
-            id="add-card-button"
-            type="submit"
-            disabled
-          >
-            Save
-          </button>
-        </form>
       </div>
     </div>
     <!--Card Template-->
@@ -208,5 +219,6 @@
         </div>
       </li>
     </template>
+    <script src="/src/pages/index.js" defer type="module"></script>
   </body>
 </html>
