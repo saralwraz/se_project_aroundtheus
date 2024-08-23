@@ -2,7 +2,7 @@ import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
-import PopupwithConfirm from "../components/PopupWithConfirm.js";
+import PopupWithConfirm from "../components/PopupWithConfirm.js"; // Fixed capitalization
 import UserInfo from "../components/UserInfo.js";
 import Section from "../components/Section.js";
 import "../pages/index.css";
@@ -19,11 +19,16 @@ const profileDescriptionInput = document.querySelector(
 const profileEditBtn = document.querySelector("#profile__edit-button");
 const addCardForm = document.querySelector("#addcard__form");
 const addCardButton = document.querySelector(".profile__add-button");
+const profileAvatar = document.querySelector("#profile-avatar");
+const avatarCloseButton = document.querySelector(".modal__close");
+const avatarModal = document.querySelector("#profile__avatar-modal");
+const trashModalSubmitButton = document.querySelector("#modal__button-trash");
+const trashIcon = document.querySelector("#card__trashcan");
 
 // User info
 const userInfo = new UserInfo("#profile__name", "#profile__subheading");
 
-// Popup
+// Popups
 const profileEditPopup = new PopupWithForm(
   "#profile__edit-modal",
   handleProfileEditSubmit
@@ -33,6 +38,8 @@ const addCardPopup = new PopupWithForm(
   handleAddCardSubmit
 );
 const previewImagePopup = new PopupWithImage("#card_modal");
+
+const trashConfirmPopup = new PopupWithConfirm("#trashcan-modal", handleDelete);
 
 // Section
 const cardSection = new Section(
@@ -57,6 +64,9 @@ profileEditBtn.addEventListener("click", () => {
 
 addCardButton.addEventListener("click", () => addCardPopup.open());
 
+trashIcon.addEventListener("click", () => openModal(trashConfirmPopup));
+trashIcon.addEventListener("click", () => closeModal(trashConfirmPopup));
+
 // Event handlers
 function handleProfileEditSubmit(profileData) {
   const { modal__input_type_name: name, modal__input_type_description: about } =
@@ -74,6 +84,25 @@ function handleImageClick(name, link) {
   previewImagePopup.open({ name, link });
 }
 
+function handleDelete(data) {
+  trashConfirmPopup.classList.add("modal_opened");
+
+  trashConfirmPopup.addEventListener("submit", (e) => {
+    e.preventDefault();
+    console.log("Delete function called with data:", data);
+
+    api
+      .deleteCard(data.apiData._id)
+      .then(() => {
+        trashConfirmPopup.classList.remove("modal_opened");
+        data.removeCard(data.cardElement);
+      })
+      .catch((err) => {
+        console.error("Error deleting card:", err);
+      });
+  });
+}
+
 // Renderer + Cards
 function createCard(item) {
   const card = new Card(item, "#card__template", handleImageClick);
@@ -85,7 +114,7 @@ function renderer(item) {
   cardSection.addItem(cardElement);
 }
 
-//API
+// API
 
 const api = new Api({
   baseUrl: "https://around-api.en.tripleten-services.com/v1",
@@ -95,9 +124,14 @@ const api = new Api({
   },
 });
 
-api.getInitialCards().then((result) => {
-  console.log(result);
-});
+api
+  .getInitialCards()
+  .then((result) => {
+    console.log(result);
+  })
+  .catch((err) => {
+    console.error("Failed to load initial cards:", err);
+  });
 
 api
   .getProfile()

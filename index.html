@@ -20,11 +20,12 @@
       </header>
       <main class="page__content">
         <section class="profile page__section">
-          <img
-            src="%=require('src/images/Avatar.svg')%>"
-            alt="Avatar of Jaques Cousteau"
-            class="profile__avatar"
-          />
+          <div class="hover__profile">
+            <img
+              src="%=require('src/images/Avatar.svg')%>"
+              alt="Avatar of Jaques Cousteau"
+              class="profile__avatar"
+            />
           <div class="profile__info">
             <h1 class="profile__name" id="profile__name">Jacques Cousteau</h1>
             <button
@@ -86,6 +87,38 @@
               id="profile__subheading-input-error"
             ></span>
           </label>
+          <button
+            class="modal__button modal__button_disabled"
+            type="submit"
+            disabled
+          >
+            Save
+          </button>
+        </form>
+      </div>
+    </div>
+    <!-- Edit Profile Avatar Modal -->
+    <div class="modal" id="profile__avatar-modal">
+      <div class="modal__container">
+        <button
+          class="modal__close"
+          type="button"
+          id="avatar__close-button"
+        ></button>
+        <h2 class="modal__heading">Change profile picture</h2>
+        <form class="modal__form" id="changeprofile_form">
+          <label for="add-profile-avatar">
+            <input
+              type="url"
+              name="modal__input_type_link"
+              id="avatar-link-input"
+              class="modal__form-input"
+              placeholder="Image link"
+              required
+            />
+            <span class="modal__error" id="add-avatar-link-input-error"></span>
+          </label>
+
           <button
             class="modal__button modal__button_disabled"
             type="submit"
