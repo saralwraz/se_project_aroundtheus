@@ -4,6 +4,15 @@ export default class Api {
     this._headers = headers;
   }
 
+  _checkResponse(res) {
+    if (res.ok) return res.json();
+    return Promise.reject(`Error: ${res.status} + ${res.message}`);
+  }
+
+  _request(url, options) {
+    return fetch(url, options).then(this._checkResponse);
+  }
+
   // Get Current User Info
   getProfile() {
     return fetch(this._baseUrl + "/users/me", {
@@ -65,21 +74,16 @@ export default class Api {
   }
 
   // Get Initial Cards
-  getInitialCards() {
+  getCards() {
     return fetch(this._baseUrl + "/cards", {
+      method: "GET",
       headers: this._headers,
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Error: ${res.status}`);
-      })
-      .catch((err) => {
-        console.error(err);
+      .then(this._checkResponse)
+      .then((result) => {
+        return result;
       });
   }
-
   // Create Card (POST)
   postCards(card) {
     return fetch(this._baseUrl + "/cards", {

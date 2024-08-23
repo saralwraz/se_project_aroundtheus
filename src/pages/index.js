@@ -2,7 +2,7 @@ import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
-import PopupWithConfirm from "../components/PopupWithConfirm.js"; // Fixed capitalization
+import PopupWithConfirm from "../components/PopupWithConfirm.js";
 import UserInfo from "../components/UserInfo.js";
 import Section from "../components/Section.js";
 import "../pages/index.css";
@@ -23,7 +23,6 @@ const profileAvatar = document.querySelector("#profile-avatar");
 const avatarCloseButton = document.querySelector(".modal__close");
 const avatarModal = document.querySelector("#profile__avatar-modal");
 const trashModalSubmitButton = document.querySelector("#modal__button-trash");
-const trashIcon = document.querySelector("#card__trashcan");
 
 // User info
 const userInfo = new UserInfo("#profile__name", "#profile__subheading");
@@ -85,17 +84,14 @@ function handleImageClick(name, link) {
 }
 
 function handleDelete(data) {
-  trashConfirmPopup.classList.add("modal_opened");
+  trashConfirmPopup.open();
 
-  trashConfirmPopup.addEventListener("submit", (e) => {
-    e.preventDefault();
-    console.log("Delete function called with data:", data);
-
+  trashModalSubmitButton.addEventListener("click", () => {
     api
-      .deleteCard(data.apiData._id)
+      .deleteCard(data._id)
       .then(() => {
-        trashConfirmPopup.classList.remove("modal_opened");
-        data.removeCard(data.cardElement);
+        data.removeCard();
+        trashConfirmPopup.close();
       })
       .catch((err) => {
         console.error("Error deleting card:", err);
@@ -105,7 +101,13 @@ function handleDelete(data) {
 
 // Renderer + Cards
 function createCard(item) {
-  const card = new Card(item, "#card__template", handleImageClick);
+  const card = new Card(
+    item,
+    "#card__template",
+    handleImageClick,
+    handleDelete,
+    handleIconClick
+  );
   return card.getView();
 }
 
@@ -118,19 +120,36 @@ function renderer(item) {
 
 const api = new Api({
   baseUrl: "https://around-api.en.tripleten-services.com/v1",
+  method: "GET",
   headers: {
     authorization: "97f6c77d-7da4-4d93-a50b-608f8d21e24f",
     "Content-Type": "application/json",
   },
 });
 
+api.getUserInfo().then((currentUser) => {
+  currentUserID = currentUser.id;
+});
+
 api
   .getInitialCards()
-  .then((result) => {
-    console.log(result);
+  .then((cardData) => {
+    console.log("Fetched cards:", cardData);
+    cardData.forEach((cardItem) => {
+      const card = new Card(
+        cardItem,
+        "#card-template",
+        handleImageClick,
+        handleDelete,
+        handleLikeIconClick,
+        currentUserID
+      );
+      const cardElement = card.getView();
+      cardSection.addItem(cardElement);
+    });
   })
   .catch((err) => {
-    console.error("Failed to load initial cards:", err);
+    console.error("Error fetching initial cards", err);
   });
 
 api

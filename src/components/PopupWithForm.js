@@ -19,6 +19,12 @@ export default class PopupWithForm extends Popup {
     return formValues;
   }
 
+  _setInputValues(data) {
+    this._inputList.forEach((input) => {
+      input.value = data[input.name];
+    });
+  }
+
   _setEventListeners() {
     this._popupForm.addEventListener("submit", async (event) => {
       event.preventDefault();
@@ -35,11 +41,11 @@ export default class PopupWithForm extends Popup {
     });
   }
 
-  renderLoading(isLoading, loadingText = "Saving...") {
+  setButtonText(isLoading, button, btnText = "Saving . . .") {
     if (isLoading) {
-      this._submitButton.textContent = loadingText;
+      button.textContent = buttonText;
     } else {
-      this._submitButton.textContent = this._submitButtonText;
+      button.textContent = buttonText;
     }
   }
 
