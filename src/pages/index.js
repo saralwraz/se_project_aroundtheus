@@ -19,9 +19,6 @@ const profileDescriptionInput = document.querySelector(
 const profileEditBtn = document.querySelector("#profile__edit-button");
 const addCardForm = document.querySelector("#addcard__form");
 const addCardButton = document.querySelector(".profile__add-button");
-const profileAvatar = document.querySelector("#profile-avatar");
-const avatarCloseButton = document.querySelector(".modal__close");
-const avatarModal = document.querySelector("#profile__avatar-modal");
 const trashModalSubmitButton = document.querySelector("#modal__button-trash");
 
 // User info
@@ -41,6 +38,11 @@ const previewImagePopup = new PopupWithImage("#card_modal");
 const trashConfirmPopup = new PopupWithConfirm("#trashcan-modal", handleDelete);
 
 // Section
+function handleAddCardSubmit(newCardData) {
+  renderer(newCardData);
+  addCardPopup.close();
+}
+
 const cardSection = new Section(
   { items: initialCards, renderer },
   ".cards__list"
@@ -63,9 +65,6 @@ profileEditBtn.addEventListener("click", () => {
 
 addCardButton.addEventListener("click", () => addCardPopup.open());
 
-trashIcon.addEventListener("click", () => openModal(trashConfirmPopup));
-trashIcon.addEventListener("click", () => closeModal(trashConfirmPopup));
-
 // Event handlers
 function handleProfileEditSubmit(profileData) {
   const { modal__input_type_name: name, modal__input_type_description: about } =
@@ -74,23 +73,18 @@ function handleProfileEditSubmit(profileData) {
   profileEditPopup.close();
 }
 
-function handleAddCardSubmit(newCardData) {
-  renderer(newCardData);
-  addCardPopup.close();
-}
-
 function handleImageClick(name, link) {
   previewImagePopup.open({ name, link });
 }
 
-function handleDelete(data) {
+function handleDelete(card) {
   trashConfirmPopup.open();
 
   trashModalSubmitButton.addEventListener("click", () => {
     api
-      .deleteCard(data._id)
+      .deleteCard(card._id)
       .then(() => {
-        data.removeCard();
+        card.removeCard();
         trashConfirmPopup.close();
       })
       .catch((err) => {
@@ -99,21 +93,41 @@ function handleDelete(data) {
   });
 }
 
-// Renderer + Cards
+function handleLikeIconClick(card) {
+  const isLiked = card.classList.toggle("card__heart_active");
+
+  if (isLiked) {
+    api
+      .likeCard(card._id)
+      .then((updatedCard) => {
+        console.log("Card liked:", updatedCard);
+      })
+      .catch((err) => {
+        console.error("Error liking card:", err);
+        card.classList.remove("card__heart_active");
+      });
+  } else {
+    api
+      .unlikeCard(card._id)
+      .then((updatedCard) => {
+        console.log("Card unliked:", updatedCard);
+      })
+      .catch((err) => {
+        console.error("Error unliking card:", err);
+        card.classList.add("card__heart_active");
+      });
+  }
+}
+
 function createCard(item) {
   const card = new Card(
     item,
     "#card__template",
     handleImageClick,
     handleDelete,
-    handleIconClick
+    (card) => handleLikeIconClick(card)
   );
   return card.getView();
-}
-
-function renderer(item) {
-  const cardElement = createCard(item);
-  cardSection.addItem(cardElement);
 }
 
 // API
@@ -136,15 +150,7 @@ api
   .then((cardData) => {
     console.log("Fetched cards:", cardData);
     cardData.forEach((cardItem) => {
-      const card = new Card(
-        cardItem,
-        "#card-template",
-        handleImageClick,
-        handleDelete,
-        handleLikeIconClick,
-        currentUserID
-      );
-      const cardElement = card.getView();
+      const cardElement = createCard(cardItem);
       cardSection.addItem(cardElement);
     });
   })

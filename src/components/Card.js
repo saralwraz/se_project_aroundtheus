@@ -15,6 +15,7 @@ export default class Card {
     this._handleImageClick = handleImageClick;
     this._handleConfirmModal = handleConfirmModal;
     this._handleLikeIconClick = handleLikeIconClick;
+    this._handleIconClick = handleIconClick;
   }
 
   _setCardData() {
@@ -39,6 +40,9 @@ export default class Card {
       .addEventListener("click", () =>
         this._handleImageClick(this._name, this._link)
       );
+    this._element
+      .querySelector(".profile__avatar")
+      .addEventListener("click", (event) => this._handleIconClick(event));
   }
 
   _getTemplate() {
