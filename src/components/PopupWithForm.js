@@ -41,11 +41,12 @@ export default class PopupWithForm extends Popup {
     });
   }
 
-  setButtonText(isLoading, button, btnText = "Saving . . .") {
+  renderLoading(isLoading) {
+    const button = this._popupElement.querySelector(".modal__button");
     if (isLoading) {
-      button.textContent = buttonText;
+      button.textContent = "Saving...";
     } else {
-      button.textContent = buttonText;
+      button.textContent = this._submitButtonText;
     }
   }
 
