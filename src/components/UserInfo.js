@@ -8,15 +8,16 @@ export default class UserInfo {
     this._aboutElement = document.querySelector(aboutSelector);
     this._avatarElement = document.querySelector(avatarSelector);
 
-    // Check if elements are initialized
-    if (!this._nameElement) {
-      console.error(`Element with selector "${nameSelector}" not found`);
-    }
-    if (!this._aboutElement) {
-      console.error(`Element with selector "${aboutSelector}" not found`);
-    }
-    if (!this._avatarElement) {
-      console.error(`Element with selector "${avatarSelector}" not found`);
+    this._setAvatarClickListener();
+  }
+
+  _setAvatarClickListener() {
+    if (this._avatarElement) {
+      this._avatarElement.addEventListener("click", () => {
+        this.openModal();
+      });
+    } else {
+      console.error("Avatar element or popup is not initialized");
     }
   }
 

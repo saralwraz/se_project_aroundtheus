@@ -23,7 +23,7 @@ const api = new Api({
 const userInfo = new UserInfo(
   "#profile__name",
   "#profile__subheading",
-  "profile__avatar"
+  ".profile__avatar"
 );
 
 // Popups
@@ -35,14 +35,12 @@ const addCardPopup = new PopupWithForm(
   "#profile__add-card-modal",
   handleAddCardSubmit
 );
+
 const previewImagePopup = new PopupWithImage("#card_modal");
 const trashConfirmPopup = new PopupWithConfirm("#trashcan-modal", handleDelete);
 
 // Section
-const cardSection = new Section(
-  { items: initialCards, renderer },
-  ".cards__list"
-);
+const cardSection = new Section({ items: [], renderer }, ".cards__list");
 
 // Validators
 const profileEditForm = document.querySelector("#profileEditForm");
@@ -93,10 +91,12 @@ function handleImageClick(card) {
 }
 
 function handleDelete(card) {
+  console.log("Handle Delete called with card:", card);
   trashConfirmPopup.open();
   trashModalSubmitBtn.addEventListener(
     "click",
     () => {
+      console.log("Deleting card with ID:", card._id);
       api
         .deleteCard(card._id)
         .then(() => {
