@@ -68,22 +68,52 @@
   max-width: 145px;
 }
 
+.hover__profile {
+  position: relative;
+  display: inline-block;
+}
+
 .profile__avatar {
   height: 120px;
   width: 120px;
   object-fit: cover;
-  background-position: center;
   border-radius: 50%;
   transition: opacity 0.3s ease;
+  display: block;
 }
 
-.profile__avatar:hover {
-  opacity: 0.2;
+.profile__avatar-edit {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  visibility: hidden;
+  border: none;
+  cursor: pointer;
+  z-index: 2;
+  opacity: 0;
+  pointer-events: none;
 }
 
-.hover__profile {
-  position: relative;
-  display: inline-block;
+.hover__profile:hover .profile__avatar-edit {
+  opacity: 1;
+}
+
+.hover__profile:hover::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 24px;
+  height: 24px;
+  background-image: url("../images/edit-pen.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 1;
+  z-index: 3;
 }
 
 .hover__profile::after {
@@ -103,18 +133,8 @@
   z-index: 1;
 }
 
-.hover__profile:hover::after {
-  opacity: 1;
-}
-
-@media screen and (max-width: 775px) {
-  .profile__name {
-    font-size: 35px;
-  }
-
-  .profile__edit-button {
-    margin-right: 60px;
-  }
+.profile__avatar:hover {
+  opacity: 0.2;
 }
 
 @media screen and (max-width: 620px) {

@@ -7,18 +7,6 @@ export default class UserInfo {
     this._nameElement = document.querySelector(nameSelector);
     this._aboutElement = document.querySelector(aboutSelector);
     this._avatarElement = document.querySelector(avatarSelector);
-
-    this._setAvatarClickListener();
-  }
-
-  _setAvatarClickListener() {
-    if (this._avatarElement) {
-      this._avatarElement.addEventListener("click", () => {
-        this.openModal();
-      });
-    } else {
-      console.error("Avatar element or popup is not initialized");
-    }
   }
 
   setAvatarPic(link) {

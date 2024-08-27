@@ -21,6 +21,11 @@
       <main class="page__content">
         <section class="profile page__section">
           <div class="hover__profile">
+            <button
+              type="button"
+              class="profile__avatar-edit"
+              id="profile__avatar-edit"
+            ></button>
             <img
               src="<%=require('./images/Avatar.png')%>"
               alt="Avatar of Jaques Cousteau"
@@ -113,7 +118,7 @@
               type="url"
               name="modal__input_type_link"
               id="avatar-link-input"
-              class="modal__form-input"
+              class="modal__form-input-link"
               placeholder="Image link"
               required
             />

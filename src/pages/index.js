@@ -19,7 +19,6 @@ const api = new Api({
 });
 
 // User info
-
 const userInfo = new UserInfo(
   "#profile__name",
   "#profile__subheading",
@@ -35,6 +34,11 @@ const addCardPopup = new PopupWithForm(
   "#profile__add-card-modal",
   handleAddCardSubmit
 );
+const editAvatarPopup = new PopupWithForm(
+  "#profile__avatar-modal",
+  handleAvatarSubmit
+);
+editAvatarPopup.setEventListeners();
 
 const previewImagePopup = new PopupWithImage("#card_modal");
 const trashConfirmPopup = new PopupWithConfirm("#trashcan-modal", handleDelete);
@@ -58,6 +62,7 @@ const profileDescriptionInput = document.querySelector(
   "#profile__subheading-input"
 );
 const trashModalSubmitBtn = document.querySelector(".modal__button-trash");
+const editProfileImage = document.querySelector(".profile__avatar-edit");
 
 // Functions
 function handleProfileEditSubmit(profileData) {
@@ -83,6 +88,19 @@ function handleAddCardSubmit(newCardData) {
     })
     .catch((err) => {
       console.error("Error adding card:", err);
+    });
+}
+
+function handleAvatarSubmit(formData) {
+  const avatarLink = formData["modal__form-input-link"];
+  api
+    .patchProfileAvatar(avatarLink)
+    .then(() => {
+      userInfo.setAvatarPic(avatarLink);
+      editAvatarPopup.close();
+    })
+    .catch((err) => {
+      console.error("Error updating avatar:", err);
     });
 }
 
@@ -112,8 +130,7 @@ function handleDelete(card) {
 }
 
 function handleLikeIconClick(card) {
-  const isLiked = card.apiData.isLiked;
-  const apiAction = isLiked
+  const apiAction = card.isLiked
     ? api.putCardLike(card._id)
     : api.deleteCardLike(card._id);
 
@@ -122,7 +139,7 @@ function handleLikeIconClick(card) {
       card.changeHeartIcon({ apiData: updatedCard });
     })
     .catch((err) => {
-      console.error(`Error ${isLiked ? "liking" : "unliking"} card:`, err);
+      console.error(`Error ${card.isLiked ? "liking" : "unliking"} card:`, err);
     });
 }
 
@@ -154,6 +171,10 @@ profileEditBtn.addEventListener("click", () => {
 });
 
 addCardButton.addEventListener("click", () => addCardPopup.open());
+
+editProfileImage.addEventListener("click", () => {
+  editAvatarPopup.open();
+});
 
 // API Calls
 api

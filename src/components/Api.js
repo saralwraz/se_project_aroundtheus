@@ -90,8 +90,8 @@ export default class Api {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify({
-        name: card.name,
-        link: card.link,
+        name: card.modal__input_type_title,
+        link: card.modal__input_type_link,
       }),
     })
       .then((res) => {
