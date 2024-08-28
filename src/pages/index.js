@@ -63,11 +63,15 @@ const profileDescriptionInput = document.querySelector(
 );
 const trashModalSubmitBtn = document.querySelector(".modal__button-trash");
 const editProfileImage = document.querySelector(".profile__avatar-edit");
+let currentUserId;
 
 // Functions
 function handleProfileEditSubmit(profileData) {
   const { modal__input_type_name: name, modal__input_type_description: about } =
     profileData;
+
+  console.log("Profile data to submit:", profileData);
+
   api
     .patchProfileInfo(name, about)
     .then(() => {
@@ -80,6 +84,8 @@ function handleProfileEditSubmit(profileData) {
 }
 
 function handleAddCardSubmit(newCardData) {
+  console.log("New card data to submit:", newCardData);
+
   api
     .postCards(newCardData)
     .then((cardData) => {
@@ -93,6 +99,9 @@ function handleAddCardSubmit(newCardData) {
 
 function handleAvatarSubmit(formData) {
   const avatarLink = formData["modal__form-input-link"];
+
+  console.log("Avatar link to submit:", avatarLink);
+
   api
     .patchProfileAvatar(avatarLink)
     .then(() => {
@@ -129,27 +138,13 @@ function handleDelete(card) {
   );
 }
 
-function handleLikeIconClick(card) {
-  const apiAction = card.isLiked
-    ? api.putCardLike(card._id)
-    : api.deleteCardLike(card._id);
-
-  apiAction
-    .then((updatedCard) => {
-      card.changeHeartIcon({ apiData: updatedCard });
-    })
-    .catch((err) => {
-      console.error(`Error ${card.isLiked ? "liking" : "unliking"} card:`, err);
-    });
-}
-
 function createCard(item) {
   const card = new Card(
     item,
     "#card__template",
     handleImageClick,
     handleDelete,
-    handleLikeIconClick
+    api
   );
   return card.getView();
 }
@@ -177,15 +172,16 @@ editProfileImage.addEventListener("click", () => {
 });
 
 // API Calls
+
 api
   .getProfile()
   .then((currentUser) => {
-    console.log("Current user ID:", currentUser._id);
+    currentUserId = currentUser._id;
+    console.log("Current user ID:", currentUserId);
   })
   .catch((err) => {
     console.error("Failed to load user information:", err);
   });
-
 api
   .getCards()
   .then((cardData) => {

@@ -6,7 +6,11 @@ export default class Api {
 
   _checkResponse(res) {
     if (res.ok) return res.json();
-    return Promise.reject(`Error: ${res.status} + ${res.message}`);
+    return res
+      .json()
+      .then((error) =>
+        Promise.reject(`Error: ${res.status} - ${error.message || error.error}`)
+      );
   }
 
   _request(url, options) {
@@ -18,17 +22,7 @@ export default class Api {
     return fetch(this._baseUrl + "/users/me", {
       method: "GET",
       headers: this._headers,
-    })
-      .then((res) => {
-        if (res.ok) return res.json();
-        return Promise.reject(`Error: ${res.status}`);
-      })
-      .then((result) => {
-        return result;
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    }).then(this._checkResponse);
   }
 
   // Update Profile Info
@@ -40,14 +34,7 @@ export default class Api {
         name: nameVar,
         about: bioVar,
       }),
-    })
-      .then((res) => {
-        if (res.ok) return res.json();
-        return Promise.reject(`Error: ${res.status}`);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    }).then(this._checkResponse);
   }
 
   // Update Avatar
@@ -58,19 +45,7 @@ export default class Api {
       body: JSON.stringify({
         avatar: link,
       }),
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Error: ${res.status}`);
-      })
-      .then((result) => {
-        return result;
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    }).then(this._checkResponse);
   }
 
   // Get Initial Cards
@@ -78,12 +53,9 @@ export default class Api {
     return fetch(this._baseUrl + "/cards", {
       method: "GET",
       headers: this._headers,
-    })
-      .then(this._checkResponse)
-      .then((result) => {
-        return result;
-      });
+    }).then(this._checkResponse);
   }
+
   // Create Card (POST)
   postCards(card) {
     return fetch(this._baseUrl + "/cards", {
@@ -93,17 +65,7 @@ export default class Api {
         name: card.modal__input_type_title,
         link: card.modal__input_type_link,
       }),
-    })
-      .then((res) => {
-        if (res.ok) return res.json();
-        return Promise.reject(`Error: ${res.status}`);
-      })
-      .then((result) => {
-        return result;
-      })
-      .catch((err) => {
-        console.error("POST Card Error:", err);
-      });
+    }).then(this._checkResponse);
   }
 
   // Delete Card
@@ -128,10 +90,7 @@ export default class Api {
     return fetch(this._baseUrl + `/cards/${cardID}/likes`, {
       method: "PUT",
       headers: this._headers,
-    }).then((res) => {
-      if (res.ok) return res.json();
-      return Promise.reject(`Error: ${res.status}`);
-    });
+    }).then(this._checkResponse);
   }
 
   // Dislike Card (DELETE)
@@ -139,9 +98,6 @@ export default class Api {
     return fetch(this._baseUrl + `/cards/${cardID}/likes`, {
       method: "DELETE",
       headers: this._headers,
-    }).then((res) => {
-      if (res.ok) return res.json();
-      return Promise.reject(`Error: ${res.status}`);
-    });
+    }).then(this._checkResponse);
   }
 }

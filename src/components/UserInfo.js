@@ -31,8 +31,9 @@ export default class UserInfo {
   }
 
   setUserInfo(newName, newAbout, newAvatar) {
-    if (this._nameElement) this._nameElement.textContent = newName;
-    if (this._aboutElement) this._aboutElement.textContent = newAbout;
-    if (this._avatarElement) this._avatarElement.src = newAvatar;
+    if (this._nameElement && newName) this._nameElement.textContent = newName;
+    if (this._aboutElement && newAbout)
+      this._aboutElement.textContent = newAbout;
+    if (this._avatarElement && newAvatar) this._avatarElement.src = newAvatar;
   }
 }

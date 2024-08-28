@@ -1,20 +1,23 @@
 export default class Card {
   constructor(
-    { name, altName, link, _id, isLiked },
+    { name, altName, link, _id, isLiked, likes = [] },
     cardSelector,
     handleImageClick,
     handleConfirmModal,
-    handleLikeIconClick
+    handleLikeIconClick,
+    api
   ) {
     this.name = name;
     this.altName = altName;
     this.link = link;
     this._id = _id;
     this._isLiked = isLiked;
+    this._likes = likes;
     this._cardSelector = cardSelector;
     this._handleImageClick = handleImageClick;
     this._handleConfirmModal = handleConfirmModal;
     this._handleLikeIconClick = handleLikeIconClick;
+    this._api = api;
   }
 
   _setCardData() {
@@ -41,9 +44,29 @@ export default class Card {
       : this._likeButton.classList.remove("card__heart_active");
   }
 
-  changeHeartIcon(isLiked) {
-    this._isliked = isLiked;
+  changeHeartIcon(apiData) {
+    console.log(apiData);
+    this._likes = apiData?.likes || [];
+    this._isLiked = this._likes.some((user) => user._id === currentUserId);
     this.setHeartIcon();
+  }
+
+  handleLikeIconClick(api) {
+    const apiAction = this._isLiked
+      ? api.deleteCardLike(this._id)
+      : api.putCardLike(this._id);
+
+    apiAction
+      .then((updatedCard) => {
+        console.log("Updated card data:", updatedCard);
+        this.changeHeartIcon(updatedCard);
+      })
+      .catch((err) => {
+        console.error(
+          `Error ${this._isLiked ? "unliking" : "liking"} card:`,
+          err
+        );
+      });
   }
 
   removeCard() {
