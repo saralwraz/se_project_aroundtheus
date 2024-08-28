@@ -4,7 +4,6 @@ export default class Card {
     cardSelector,
     handleImageClick,
     handleConfirmModal,
-    handleLikeIconClick,
     api
   ) {
     this.name = name;
@@ -16,7 +15,6 @@ export default class Card {
     this._cardSelector = cardSelector;
     this._handleImageClick = handleImageClick;
     this._handleConfirmModal = handleConfirmModal;
-    this._handleLikeIconClick = handleLikeIconClick;
     this._api = api;
   }
 
@@ -28,7 +26,7 @@ export default class Card {
 
   _setEventListeners() {
     this._likeButton.addEventListener("click", () =>
-      this._handleLikeIconClick(this)
+      this._handleLikeIconClick()
     );
     this._trashButton.addEventListener("click", () =>
       this._handleConfirmModal(this)
@@ -36,30 +34,29 @@ export default class Card {
     this._cardImage.addEventListener("click", () =>
       this._handleImageClick(this)
     );
+    console.log("Event listeners set.");
   }
 
-  setHeartIcon() {
-    this._isLiked
-      ? this._likeButton.classList.add("card__heart_active")
-      : this._likeButton.classList.remove("card__heart_active");
+  _updateHeartIcon() {
+    console.log(`Updating heart icon. Current liked state: ${this._isLiked}`);
+    if (this._isLiked) {
+      this._likeButton.classList.add("card__heart_active");
+    } else {
+      this._likeButton.classList.remove("card__heart_active");
+    }
+    console.log(`Heart icon updated. New liked state: ${this._isLiked}`);
   }
 
-  changeHeartIcon(apiData) {
-    console.log(apiData);
-    this._likes = apiData?.likes || [];
-    this._isLiked = this._likes.some((user) => user._id === currentUserId);
-    this.setHeartIcon();
-  }
-
-  handleLikeIconClick(api) {
+  _handleLikeIconClick() {
+    console.log(`Like button clicked. Current liked state: ${this._isLiked}`);
     const apiAction = this._isLiked
-      ? api.deleteCardLike(this._id)
-      : api.putCardLike(this._id);
+      ? this._api.deleteCardLike(this._id)
+      : this._api.putCardLike(this._id);
 
     apiAction
       .then((updatedCard) => {
-        console.log("Updated card data:", updatedCard);
-        this.changeHeartIcon(updatedCard);
+        console.log(`API action succeeded. Updated card data:`, updatedCard);
+        this._updateCardData(updatedCard);
       })
       .catch((err) => {
         console.error(
@@ -69,7 +66,19 @@ export default class Card {
       });
   }
 
+  _updateCardData(updatedCard) {
+    console.log(`Updating card data with:`, updatedCard);
+    this._likes = updatedCard.likes || [];
+    this._isLiked = this._likes.some((user) => user._id === currentUserId);
+    console.log(
+      `Card data updated. Liked state: ${this._isLiked}, Likes:`,
+      this._likes
+    );
+    this._updateHeartIcon();
+  }
+
   removeCard() {
+    console.log(`Removing card with ID: ${this._id}`);
     this.cardElement.remove();
     this.cardElement = null;
   }

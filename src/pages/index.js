@@ -7,7 +7,7 @@ import UserInfo from "../components/UserInfo.js";
 import Section from "../components/Section.js";
 import "../pages/index.css";
 import Api from "../components/Api.js";
-import { initialCards, config } from "../utils/constants.js";
+import { config } from "../utils/constants.js";
 
 // API
 const api = new Api({
@@ -144,7 +144,7 @@ function createCard(item) {
     "#card__template",
     handleImageClick,
     handleDelete,
-    api
+    api // Pass the Api instance
   );
   return card.getView();
 }
@@ -172,7 +172,6 @@ editProfileImage.addEventListener("click", () => {
 });
 
 // API Calls
-
 api
   .getProfile()
   .then((currentUser) => {
