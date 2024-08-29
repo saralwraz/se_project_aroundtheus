@@ -4,6 +4,7 @@ export default class Card {
     cardSelector,
     handleImageClick,
     handleConfirmModal,
+    handleLikeIconClick,
     api,
     currentUserId
   ) {
@@ -15,6 +16,7 @@ export default class Card {
     this._likes = likes;
     this._cardSelector = cardSelector;
     this._handleImageClick = handleImageClick;
+    this._handleLikeIconClick = handleLikeIconClick;
     this._handleConfirmModal = handleConfirmModal;
     this._api = api;
     this._currentUserId = currentUserId;
@@ -47,27 +49,9 @@ export default class Card {
     }
   }
 
-  updateHeartIcon() {
-    this._likeButton.classList.toggle("card__heart_active");
-  }
-
-  _handleLikeIconClick() {
-    console.log(`Like button clicked. Current liked state: ${this._isLiked}`);
-    const apiAction = this._isLiked
-      ? this._api.deleteCardLike(this._id)
-      : this._api.putCardLike(this._id);
-
-    apiAction
-      .then((updatedCard) => {
-        console.log(`API action succeeded. Updated card data:`, updatedCard);
-        this._updateCardData(updatedCard);
-      })
-      .catch((err) => {
-        console.error(
-          `Error ${this._isLiked ? "unliking" : "liking"} card:`,
-          err
-        );
-      });
+  updateHeartIcon(isLiked) {
+    this._isLiked = isLiked;
+    this._likeButton.classList.toggle("card__heart_active", this._isLiked);
   }
 
   _updateCardData(updatedCard) {
@@ -76,10 +60,7 @@ export default class Card {
     this._isLiked = this._likes.some(
       (user) => user._id === this._currentUserId
     );
-    console.log(
-      `Card data updated. Liked state: ${this._isLiked}, Likes:`,
-      this._likes
-    );
+
     this._updateHeartIcon();
   }
 

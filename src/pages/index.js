@@ -71,6 +71,8 @@ function handleProfileEditSubmit(profileData) {
   const name = profileData.modal__input_type_name;
   const about = profileData.modal__input_type_description;
 
+  profileEditPopup.renderLoading(true);
+
   api
     .patchProfileInfo(name, about)
     .then(() => {
@@ -79,6 +81,9 @@ function handleProfileEditSubmit(profileData) {
     })
     .catch((err) => {
       console.error("Error updating profile:", err);
+    })
+    .finally(() => {
+      profileEditPopup.renderLoading(false);
     });
 }
 
@@ -131,6 +136,24 @@ function handleDelete(card) {
   );
 }
 
+function handleLikeIconClick(card) {
+  const apiAction = card._isLiked
+    ? api.deleteCardLike(card._id)
+    : api.putCardLike(card._id);
+
+  apiAction
+    .then((updatedCard) => {
+      console.log(`API action succeeded. Updated card data:`, updatedCard);
+      this.updateHeartIcon();
+    })
+    .catch((err) => {
+      console.error(
+        `Error ${card._isLiked ? "unliking" : "liking"} card:`,
+        err
+      );
+    });
+}
+
 function createCard(cardData) {
   const cardInstance = new Card(
     {
@@ -143,9 +166,8 @@ function createCard(cardData) {
     },
     "#card__template",
     handleImageClick,
-    handleDelete,
-    api,
-    currentUserId
+    () => handleDelete(cardInstance),
+    () => handleLikeIconClick(cardInstance)
   );
 
   return cardInstance.getView();
