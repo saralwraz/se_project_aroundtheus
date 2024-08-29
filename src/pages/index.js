@@ -71,8 +71,6 @@ function handleProfileEditSubmit(profileData) {
   const name = profileData.modal__input_type_name;
   const about = profileData.modal__input_type_description;
 
-  console.log("Profile data to submit:", { name, about });
-
   api
     .patchProfileInfo(name, about)
     .then(() => {
@@ -85,8 +83,6 @@ function handleProfileEditSubmit(profileData) {
 }
 
 function handleAddCardSubmit(newCardData) {
-  console.log("New card data to submit:", newCardData);
-
   api
     .postCards(newCardData)
     .then((cardData) => {
@@ -100,8 +96,6 @@ function handleAddCardSubmit(newCardData) {
 
 function handleAvatarSubmit(formData) {
   const avatarLink = formData["modal__form-input-link"];
-
-  console.log("Avatar link to submit:", avatarLink);
 
   api
     .patchProfileAvatar(avatarLink)
@@ -119,12 +113,10 @@ function handleImageClick(card) {
 }
 
 function handleDelete(card) {
-  console.log("Handle Delete called with card:", card);
   trashConfirmPopup.open();
   trashModalSubmitBtn.addEventListener(
     "click",
     () => {
-      console.log("Deleting card with ID:", card._id);
       api
         .deleteCard(card._id)
         .then(() => {
@@ -186,7 +178,6 @@ api
   .getProfile()
   .then((currentUser) => {
     currentUserId = currentUser._id;
-    console.log("Current user ID:", currentUserId);
   })
   .catch((err) => {
     console.error("Failed to load user information:", err);
@@ -195,7 +186,6 @@ api
 api
   .getCards()
   .then((cardsData) => {
-    console.log("Fetched cards:", cardsData);
     cardsData.forEach((cardItem) => {
       renderer(cardItem);
     });

@@ -40,9 +40,15 @@ export default class Card {
   }
 
   _updateHeartIcon() {
-    console.log(`Updating heart icon. Current liked state: ${this._isLiked}`);
-    this._likeButton.classList.toggle("card__heart_active", this._isLiked);
-    console.log(`Heart icon updated. New liked state: ${this._isLiked}`);
+    if (this._isLiked) {
+      this._likeButton.classList.add("card__heart_active");
+    } else {
+      this._likeButton.classList.remove("card__heart_active");
+    }
+  }
+
+  updateHeartIcon() {
+    this._likeButton.classList.toggle("card__heart_active");
   }
 
   _handleLikeIconClick() {
@@ -88,6 +94,7 @@ export default class Card {
     this._cardImage = this.cardElement.querySelector(".card__image");
     this._cardTitle = this.cardElement.querySelector(".card__text");
 
+    this._updateHeartIcon();
     this._setCardData();
     this._setEventListeners();
 
