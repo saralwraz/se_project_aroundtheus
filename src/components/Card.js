@@ -38,7 +38,6 @@ export default class Card {
     this._cardImage.addEventListener("click", () =>
       this._handleImageClick(this)
     );
-    console.log("Event listeners set.");
   }
 
   _updateHeartIcon() {
@@ -55,7 +54,6 @@ export default class Card {
   }
 
   _updateCardData(updatedCard) {
-    console.log(`Updating card data with:`, updatedCard);
     this._likes = updatedCard.likes || [];
     this._isLiked = this._likes.some(
       (user) => user._id === this._currentUserId
@@ -83,7 +81,6 @@ export default class Card {
   }
 
   removeCard() {
-    console.log(`Removing card with ID: ${this._id}`);
     this.cardElement.remove();
     this.cardElement = null;
   }

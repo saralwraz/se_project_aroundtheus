@@ -12,7 +12,7 @@ export default class PopupWithForm extends Popup {
   }
 
   _getInputValues() {
-    console.log("input list", this._inputList);
+    "input list", this._inputList;
     const formValues = {};
     this._inputList.forEach((input) => {
       formValues[input.name] = input.value;
@@ -30,7 +30,7 @@ export default class PopupWithForm extends Popup {
     this._popupForm.addEventListener("submit", async (event) => {
       event.preventDefault();
       const data = this._getInputValues();
-      console.log("Form data:", data);
+      "Form data:", data;
       this.renderLoading(true);
       try {
         await this._handleFormSubmission(data);

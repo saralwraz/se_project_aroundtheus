@@ -81,7 +81,7 @@ export default class Api {
           .then((text) => Promise.reject(`Error: ${res.status} - ${text}`));
       })
       .then((result) => {
-        console.log(result);
+        result;
       });
   }
 

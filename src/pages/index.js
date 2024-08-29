@@ -143,8 +143,7 @@ function handleLikeIconClick(card) {
 
   apiAction
     .then((updatedCard) => {
-      console.log(`API action succeeded. Updated card data:`, updatedCard);
-      this.updateHeartIcon();
+      card.updateHeartIcon();
     })
     .catch((err) => {
       console.error(
