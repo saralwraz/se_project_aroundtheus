@@ -18,6 +18,8 @@ const api = new Api({
   },
 });
 
+let currentUserId;
+
 // User info
 const userInfo = new UserInfo(
   "#profile__name",
@@ -63,14 +65,13 @@ const profileDescriptionInput = document.querySelector(
 );
 const trashModalSubmitBtn = document.querySelector(".modal__button-trash");
 const editProfileImage = document.querySelector(".profile__avatar-edit");
-let currentUserId;
 
 // Functions
 function handleProfileEditSubmit(profileData) {
-  const { modal__input_type_name: name, modal__input_type_description: about } =
-    profileData;
+  const name = profileData.modal__input_type_name;
+  const about = profileData.modal__input_type_description;
 
-  console.log("Profile data to submit:", profileData);
+  console.log("Profile data to submit:", { name, about });
 
   api
     .patchProfileInfo(name, about)
@@ -138,19 +139,28 @@ function handleDelete(card) {
   );
 }
 
-function createCard(item) {
-  const card = new Card(
-    item,
+function createCard(cardData) {
+  const cardInstance = new Card(
+    {
+      name: cardData.name,
+      altName: cardData.altName || "",
+      link: cardData.link,
+      _id: cardData._id,
+      isLiked: cardData.isLiked || false,
+      likes: cardData.likes,
+    },
     "#card__template",
     handleImageClick,
     handleDelete,
-    api // Pass the Api instance
+    api,
+    currentUserId
   );
-  return card.getView();
+
+  return cardInstance.getView();
 }
 
-function renderer(item) {
-  const cardElement = createCard(item);
+function renderer(cardData) {
+  const cardElement = createCard(cardData);
   cardSection.addItem(cardElement);
 }
 
@@ -181,13 +191,13 @@ api
   .catch((err) => {
     console.error("Failed to load user information:", err);
   });
+
 api
   .getCards()
-  .then((cardData) => {
-    console.log("Fetched cards:", cardData);
-    cardData.forEach((cardItem) => {
-      const cardElement = createCard(cardItem);
-      cardSection.addItem(cardElement);
+  .then((cardsData) => {
+    console.log("Fetched cards:", cardsData);
+    cardsData.forEach((cardItem) => {
+      renderer(cardItem);
     });
   })
   .catch((err) => {

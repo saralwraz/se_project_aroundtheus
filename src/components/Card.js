@@ -4,7 +4,8 @@ export default class Card {
     cardSelector,
     handleImageClick,
     handleConfirmModal,
-    api
+    api,
+    currentUserId
   ) {
     this.name = name;
     this.altName = altName;
@@ -16,6 +17,7 @@ export default class Card {
     this._handleImageClick = handleImageClick;
     this._handleConfirmModal = handleConfirmModal;
     this._api = api;
+    this._currentUserId = currentUserId;
   }
 
   _setCardData() {
@@ -39,11 +41,7 @@ export default class Card {
 
   _updateHeartIcon() {
     console.log(`Updating heart icon. Current liked state: ${this._isLiked}`);
-    if (this._isLiked) {
-      this._likeButton.classList.add("card__heart_active");
-    } else {
-      this._likeButton.classList.remove("card__heart_active");
-    }
+    this._likeButton.classList.toggle("card__heart_active", this._isLiked);
     console.log(`Heart icon updated. New liked state: ${this._isLiked}`);
   }
 
@@ -69,18 +67,14 @@ export default class Card {
   _updateCardData(updatedCard) {
     console.log(`Updating card data with:`, updatedCard);
     this._likes = updatedCard.likes || [];
-    this._isLiked = this._likes.some((user) => user._id === currentUserId);
+    this._isLiked = this._likes.some(
+      (user) => user._id === this._currentUserId
+    );
     console.log(
       `Card data updated. Liked state: ${this._isLiked}, Likes:`,
       this._likes
     );
     this._updateHeartIcon();
-  }
-
-  removeCard() {
-    console.log(`Removing card with ID: ${this._id}`);
-    this.cardElement.remove();
-    this.cardElement = null;
   }
 
   getView() {
@@ -98,5 +92,11 @@ export default class Card {
     this._setEventListeners();
 
     return this.cardElement;
+  }
+
+  removeCard() {
+    console.log(`Removing card with ID: ${this._id}`);
+    this.cardElement.remove();
+    this.cardElement = null;
   }
 }

@@ -113,28 +113,23 @@
         ></button>
         <h2 class="modal__heading">Change profile picture</h2>
         <form class="modal__form" id="changeprofile_form">
-          <label for="add-profile-avatar">
+          <label for="avatar-link-input">
             <input
               type="url"
-              name="modal__input_type_link"
+              name="modal__form-input-link"
               id="avatar-link-input"
               class="modal__form-input-link"
               placeholder="Image link"
+              minlength="5"
               required
             />
             <span class="modal__error" id="add-avatar-link-input-error"></span>
           </label>
-
-          <button
-            class="modal__button modal__button_disabled"
-            type="submit"
-            disabled
-          >
-            Save
-          </button>
+          <button class="modal__button" type="submit">Save</button>
         </form>
       </div>
     </div>
+
     <!-- Add a Card Modal -->
     <div class="modal" id="profile__add-card-modal">
       <div class="modal__container">

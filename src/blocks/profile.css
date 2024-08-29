@@ -80,6 +80,7 @@
   border-radius: 50%;
   transition: opacity 0.3s ease;
   display: block;
+  z-index: 5;
 }
 
 .profile__avatar-edit {
@@ -88,32 +89,18 @@
   left: 0;
   height: 100%;
   width: 100%;
-  visibility: hidden;
   border: none;
   cursor: pointer;
-  z-index: 2;
+  z-index: 10;
+  background: transparent;
   opacity: 0;
   pointer-events: none;
+  transition: opacity 0.3s ease;
 }
 
 .hover__profile:hover .profile__avatar-edit {
   opacity: 1;
-}
-
-.hover__profile:hover::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 24px;
-  height: 24px;
-  background-image: url("../images/edit-pen.svg");
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  opacity: 1;
-  z-index: 3;
+  pointer-events: auto;
 }
 
 .hover__profile::after {
@@ -130,7 +117,11 @@
   background-position: center;
   opacity: 0;
   transition: opacity 0.3s ease;
-  z-index: 1;
+  z-index: 6;
+}
+
+.hover__profile:hover::after {
+  opacity: 1;
 }
 
 .profile__avatar:hover {
@@ -171,6 +162,7 @@
   }
 
   .profile__edit-button {
+    z-index: 1;
     width: 18px;
     height: 18px;
     margin: 0;
