@@ -40,6 +40,8 @@ const editAvatarPopup = new PopupWithForm(
   "#profile__avatar-modal",
   handleAvatarSubmit
 );
+profileEditPopup.setEventListeners();
+addCardPopup.setEventListeners();
 editAvatarPopup.setEventListeners();
 
 const previewImagePopup = new PopupWithImage("#card_modal");
@@ -88,6 +90,8 @@ function handleProfileEditSubmit(profileData) {
 }
 
 function handleAddCardSubmit(newCardData) {
+  addCardPopup.renderLoading(true);
+
   api
     .postCards(newCardData)
     .then((cardData) => {
@@ -96,11 +100,16 @@ function handleAddCardSubmit(newCardData) {
     })
     .catch((err) => {
       console.error("Error adding card:", err);
+    })
+    .finally(() => {
+      addCardPopup.renderLoading(false);
     });
 }
 
 function handleAvatarSubmit(formData) {
   const avatarLink = formData["modal__form-input-link"];
+
+  editAvatarPopup.renderLoading(true);
 
   api
     .patchProfileAvatar(avatarLink)
@@ -110,6 +119,9 @@ function handleAvatarSubmit(formData) {
     })
     .catch((err) => {
       console.error("Error updating avatar:", err);
+    })
+    .finally(() => {
+      editAvatarPopup.renderLoading(false);
     });
 }
 
