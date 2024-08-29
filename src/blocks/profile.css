@@ -8,12 +8,13 @@
   display: grid;
   grid-template-areas:
     "title button"
-    "description decription";
+    "description description";
   grid-template-columns: minmax(auto, 373px) auto;
   grid-gap: 9px 17px;
   align-items: center;
   padding-left: 30px;
 }
+
 .profile__edit-button {
   background: transparent url(../images/edit-sign.svg) center no-repeat;
   height: 24px;
@@ -21,6 +22,7 @@
   grid-area: button;
   border: 1px solid #fff;
 }
+
 .profile__edit-button:hover {
   cursor: pointer;
   opacity: 60%;
@@ -124,8 +126,8 @@
   opacity: 1;
 }
 
-.profile__avatar:hover {
-  opacity: 0.2;
+.hover__profile:hover .profile__avatar {
+  opacity: 0.3;
 }
 
 @media screen and (max-width: 620px) {
