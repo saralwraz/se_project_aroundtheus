@@ -178,6 +178,11 @@ api
   .getProfile()
   .then((currentUser) => {
     currentUserId = currentUser._id;
+    userInfo.setUserInfo(
+      currentUser.name,
+      currentUser.about,
+      currentUser.avatar
+    );
   })
   .catch((err) => {
     console.error("Failed to load user information:", err);
