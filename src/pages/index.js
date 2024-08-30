@@ -80,6 +80,8 @@ function handleProfileEditSubmit(profileData) {
     .then(() => {
       userInfo.setUserInfo(name, about);
       profileEditPopup.close();
+      profileEditForm.reset();
+      profileEditFormValidator._disableSubmitButton();
     })
     .catch((err) => {
       console.error("Error updating profile:", err);
@@ -97,6 +99,8 @@ function handleAddCardSubmit(newCardData) {
     .then((cardData) => {
       renderer(cardData);
       addCardPopup.close();
+      addCardForm.reset();
+      addCardFormValidator._disableSubmitButton();
     })
     .catch((err) => {
       console.error("Error adding card:", err);
@@ -116,6 +120,8 @@ function handleAvatarSubmit(formData) {
     .then(() => {
       userInfo.setAvatarPic(avatarLink);
       editAvatarPopup.close();
+      editAvatarPopup._formElement.reset();
+      editAvatarPopup._formValidator._disableSubmitButton();
     })
     .catch((err) => {
       console.error("Error updating avatar:", err);
@@ -149,7 +155,7 @@ function handleDelete(card) {
 }
 
 function handleLikeIconClick(card) {
-  const apiAction = card._isLiked
+  const apiAction = card.isLiked
     ? api.deleteCardLike(card._id)
     : api.putCardLike(card._id);
 

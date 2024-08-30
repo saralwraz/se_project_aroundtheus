@@ -73,16 +73,7 @@ export default class Api {
     return fetch(`${this._baseUrl}/cards/${cardID}`, {
       method: "DELETE",
       headers: this._headers,
-    })
-      .then((res) => {
-        if (res.ok) return res.json();
-        return res
-          .text()
-          .then((text) => Promise.reject(`Error: ${res.status} - ${text}`));
-      })
-      .then((result) => {
-        result;
-      });
+    }).then(this._checkResponse);
   }
 
   // Like the Card (PUT)
