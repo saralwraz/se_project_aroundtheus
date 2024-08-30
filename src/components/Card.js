@@ -34,7 +34,6 @@ export default class Card {
       this._handleLikeIconClick();
     });
     this._trashButton.addEventListener("click", () => {
-      console.log("Trash button clicked. Card instance:", this);
       this._handleConfirmModal(this);
     });
     this._cardImage.addEventListener("click", () => {
@@ -70,7 +69,6 @@ export default class Card {
       .content.querySelector(".card")
       .cloneNode(true);
 
-    console.log("Card element created:", this.cardElement);
     this._likeButton = this.cardElement.querySelector(".card__heart");
     this._trashButton = this.cardElement.querySelector(".card__trashcan");
     this._cardImage = this.cardElement.querySelector(".card__image");
@@ -85,7 +83,6 @@ export default class Card {
 
   removeCard() {
     if (this.cardElement) {
-      console.log("Removing card element:", this.cardElement);
       this.cardElement.remove();
       this.cardElement = null;
     } else {

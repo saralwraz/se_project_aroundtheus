@@ -19,76 +19,76 @@ export default class Api {
 
   // Get Current User Info
   getProfile() {
-    return fetch(this._baseUrl + "/users/me", {
+    return this._request(this._baseUrl + "/users/me", {
       method: "GET",
       headers: this._headers,
-    }).then(this._checkResponse);
+    });
   }
 
   // Update Profile Info
   patchProfileInfo(nameVar, bioVar) {
-    return fetch(this._baseUrl + "/users/me", {
+    return this._request(this._baseUrl + "/users/me", {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
         name: nameVar,
         about: bioVar,
       }),
-    }).then(this._checkResponse);
+    });
   }
 
   // Update Avatar
   patchProfileAvatar(link) {
-    return fetch(this._baseUrl + "/users/me/avatar", {
+    return this._request(this._baseUrl + "/users/me/avatar", {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
         avatar: link,
       }),
-    }).then(this._checkResponse);
+    });
   }
 
   // Get Initial Cards
   getCards() {
-    return fetch(this._baseUrl + "/cards", {
+    return this._request(this._baseUrl + "/cards", {
       method: "GET",
       headers: this._headers,
-    }).then(this._checkResponse);
+    });
   }
 
   // Create Card (POST)
   postCards(card) {
-    return fetch(this._baseUrl + "/cards", {
+    return this._request(this._baseUrl + "/cards", {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify({
         name: card.modal__input_type_title,
         link: card.modal__input_type_link,
       }),
-    }).then(this._checkResponse);
+    });
   }
 
   // Delete Card
   deleteCard(cardID) {
-    return fetch(`${this._baseUrl}/cards/${cardID}`, {
+    return this._request(`${this._baseUrl}/cards/${cardID}`, {
       method: "DELETE",
       headers: this._headers,
-    }).then(this._checkResponse);
+    });
   }
 
   // Like the Card (PUT)
   putCardLike(cardID) {
-    return fetch(this._baseUrl + `/cards/${cardID}/likes`, {
+    return this._request(this._baseUrl + `/cards/${cardID}/likes`, {
       method: "PUT",
       headers: this._headers,
-    }).then(this._checkResponse);
+    });
   }
 
   // Dislike Card (DELETE)
   deleteCardLike(cardID) {
-    return fetch(this._baseUrl + `/cards/${cardID}/likes`, {
+    return this._request(this._baseUrl + `/cards/${cardID}/likes`, {
       method: "DELETE",
       headers: this._headers,
-    }).then(this._checkResponse);
+    });
   }
 }
