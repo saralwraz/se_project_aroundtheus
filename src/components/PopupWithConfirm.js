@@ -1,25 +1,26 @@
-import Popup from "./Popup";
+import Popup from "./Popup.js";
 
 export default class PopupWithConfirm extends Popup {
-  constructor(popupSelector, handleDelete) {
+  constructor(popupSelector) {
     super({ popupSelector });
-
-    this._handleDelete = handleDelete;
+    this._submitButton = this._popupElement.querySelector(
+      ".modal__button-trash"
+    );
+    this._handleSubmit = null;
   }
 
   setSubmitFunction(submitFunction) {
-    this._handleDelete = submitFunction;
+    this._handleSubmit = submitFunction;
   }
 
   setEventListeners() {
     super.setEventListeners();
-
-    this._popupElement.addEventListener("submit", (e) => {
+    this._popupElement.querySelector("form").addEventListener("submit", (e) => {
       e.preventDefault();
-      if (this._handleDelete) {
-        this._handleDelete();
+      if (this._handleSubmit) {
+        this._handleSubmit();
       } else {
-        console.error("No delete handler provided");
+        console.error("Submit function not set.");
       }
     });
   }

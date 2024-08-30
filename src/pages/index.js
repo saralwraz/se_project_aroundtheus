@@ -40,12 +40,14 @@ const editAvatarPopup = new PopupWithForm(
   "#profile__avatar-modal",
   handleAvatarSubmit
 );
+const previewImagePopup = new PopupWithImage("#card_modal");
+const trashConfirmPopup = new PopupWithConfirm("#trashcan-modal");
+
+//Modal Event Listeners
 profileEditPopup.setEventListeners();
 addCardPopup.setEventListeners();
 editAvatarPopup.setEventListeners();
-
-const previewImagePopup = new PopupWithImage("#card_modal");
-const trashConfirmPopup = new PopupWithConfirm("#trashcan-modal", handleDelete);
+trashConfirmPopup.setEventListeners();
 
 // Section
 const cardSection = new Section({ items: [], renderer }, ".cards__list");
@@ -53,10 +55,14 @@ const cardSection = new Section({ items: [], renderer }, ".cards__list");
 // Validators
 const profileEditForm = document.querySelector("#profileEditForm");
 const addCardForm = document.querySelector("#addcard__form");
+const avatarForm = document.querySelector("#changeprofile_form");
+
 const profileEditFormValidator = new FormValidator(config, profileEditForm);
-const addCardFormValidator = new FormValidator(config, addCardForm);
 profileEditFormValidator.enableValidation();
+const addCardFormValidator = new FormValidator(config, addCardForm);
 addCardFormValidator.enableValidation();
+const avatarFormValidator = new FormValidator(config, avatarForm);
+avatarFormValidator.enableValidation();
 
 // Constants
 const profileEditBtn = document.querySelector("#profile__edit-button");
@@ -65,7 +71,6 @@ const profileTitleInput = document.querySelector("#profile__name-input");
 const profileDescriptionInput = document.querySelector(
   "#profile__subheading-input"
 );
-const trashModalSubmitBtn = document.querySelector(".modal__button-trash");
 const editProfileImage = document.querySelector(".profile__avatar-edit");
 
 // Functions
@@ -79,8 +84,10 @@ function handleProfileEditSubmit(profileData) {
     .patchProfileInfo(name, about)
     .then(() => {
       userInfo.setUserInfo(name, about);
-
       profileEditPopup.close();
+      profileEditForm.reset();
+      profileEditFormValidator.reset();
+      profileEditFormValidator._disableSubmitButton();
     })
     .catch((err) => {
       console.error("Error updating profile:", err);
@@ -99,13 +106,15 @@ function handleAddCardSubmit(newCardData) {
     .then((cardData) => {
       renderer(cardData);
       addCardPopup.close();
+      addCardForm.reset();
+      addCardFormValidator.reset();
+      addCardPopup._submitButton.disabled = false;
     })
     .catch((err) => {
       console.error("Error adding card:", err);
     })
     .finally(() => {
       addCardPopup.renderLoading(false);
-      addCardPopup._submitButton.disabled = false;
     });
 }
 
@@ -119,6 +128,8 @@ function handleAvatarSubmit(formData) {
     .then(() => {
       userInfo.setAvatarPic(avatarLink);
       editAvatarPopup.close();
+      avatarForm.reset();
+      avatarFormValidator.reset();
     })
     .catch((err) => {
       console.error("Error updating avatar:", err);
@@ -133,6 +144,20 @@ function handleImageClick(card) {
 }
 
 function handleDelete(card) {
+  console.log("Delete function called");
+  trashConfirmPopup.setSubmitFunction(() => {
+    console.log("Submit function in PopupWithConfirm is called");
+    api
+      .deleteCard(card._id)
+      .then(() => {
+        console.log("Card about to be removed:", card);
+        card.removeCard();
+        trashConfirmPopup.close();
+      })
+      .catch((err) => {
+        console.error("Error deleting card:", err);
+      });
+  });
   trashConfirmPopup.open();
 }
 
@@ -142,14 +167,11 @@ function handleLikeIconClick(card) {
     : api.putCardLike(card._id);
 
   apiAction
-    .then((updatedCard) => {
+    .then(() => {
       card.updateHeartIcon();
     })
     .catch((err) => {
-      console.error(
-        `Error ${card._isLiked ? "unliking" : "liking"} card:`,
-        err
-      );
+      console.error(`Error ${card.isLiked ? "unliking" : "liking"} card:`, err);
     });
 }
 

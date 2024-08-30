@@ -20,6 +20,7 @@ export default class Card {
     this._handleConfirmModal = handleConfirmModal;
     this._api = api;
     this._currentUserId = currentUserId;
+    this.cardElement = null;
   }
 
   _setCardData() {
@@ -29,15 +30,16 @@ export default class Card {
   }
 
   _setEventListeners() {
-    this._likeButton.addEventListener("click", () =>
-      this._handleLikeIconClick()
-    );
-    this._trashButton.addEventListener("click", () =>
-      this._handleConfirmModal(this)
-    );
-    this._cardImage.addEventListener("click", () =>
-      this._handleImageClick(this)
-    );
+    this._likeButton.addEventListener("click", () => {
+      this._handleLikeIconClick();
+    });
+    this._trashButton.addEventListener("click", () => {
+      console.log("Trash button clicked. Card instance:", this);
+      this._handleConfirmModal(this);
+    });
+    this._cardImage.addEventListener("click", () => {
+      this._handleImageClick(this);
+    });
   }
 
   _updateHeartIcon() {
@@ -68,6 +70,7 @@ export default class Card {
       .content.querySelector(".card")
       .cloneNode(true);
 
+    console.log("Card element created:", this.cardElement);
     this._likeButton = this.cardElement.querySelector(".card__heart");
     this._trashButton = this.cardElement.querySelector(".card__trashcan");
     this._cardImage = this.cardElement.querySelector(".card__image");
@@ -81,7 +84,12 @@ export default class Card {
   }
 
   removeCard() {
-    this.cardElement.remove();
-    this.cardElement = null;
+    if (this.cardElement) {
+      console.log("Removing card element:", this.cardElement);
+      this.cardElement.remove();
+      this.cardElement = null;
+    } else {
+      console.error("Card element is already null, cannot remove.");
+    }
   }
 }
