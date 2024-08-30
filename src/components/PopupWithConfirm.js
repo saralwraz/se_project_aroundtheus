@@ -1,9 +1,9 @@
 import Popup from "./Popup";
+
 export default class PopupWithConfirm extends Popup {
   constructor(popupSelector, handleDelete) {
     super({ popupSelector });
 
-    this._popupSelector = popupSelector;
     this._handleDelete = handleDelete;
   }
 
@@ -16,7 +16,11 @@ export default class PopupWithConfirm extends Popup {
 
     this._popupElement.addEventListener("submit", (e) => {
       e.preventDefault();
-      this._handleDelete();
+      if (this._handleDelete) {
+        this._handleDelete();
+      } else {
+        console.error("No delete handler provided");
+      }
     });
   }
 }

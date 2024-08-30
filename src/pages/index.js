@@ -75,13 +75,12 @@ function handleProfileEditSubmit(profileData) {
 
   profileEditPopup.renderLoading(true);
 
-  api
+  return api
     .patchProfileInfo(name, about)
     .then(() => {
       userInfo.setUserInfo(name, about);
+
       profileEditPopup.close();
-      profileEditForm.reset();
-      profileEditFormValidator._disableSubmitButton();
     })
     .catch((err) => {
       console.error("Error updating profile:", err);
@@ -93,20 +92,20 @@ function handleProfileEditSubmit(profileData) {
 
 function handleAddCardSubmit(newCardData) {
   addCardPopup.renderLoading(true);
+  addCardPopup._submitButton.disabled = true;
 
-  api
+  return api
     .postCards(newCardData)
     .then((cardData) => {
       renderer(cardData);
       addCardPopup.close();
-      addCardForm.reset();
-      addCardFormValidator._disableSubmitButton();
     })
     .catch((err) => {
       console.error("Error adding card:", err);
     })
     .finally(() => {
       addCardPopup.renderLoading(false);
+      addCardPopup._submitButton.disabled = false;
     });
 }
 
@@ -115,13 +114,11 @@ function handleAvatarSubmit(formData) {
 
   editAvatarPopup.renderLoading(true);
 
-  api
+  return api
     .patchProfileAvatar(avatarLink)
     .then(() => {
       userInfo.setAvatarPic(avatarLink);
       editAvatarPopup.close();
-      editAvatarPopup._formElement.reset();
-      editAvatarPopup._formValidator._disableSubmitButton();
     })
     .catch((err) => {
       console.error("Error updating avatar:", err);
@@ -137,21 +134,6 @@ function handleImageClick(card) {
 
 function handleDelete(card) {
   trashConfirmPopup.open();
-  trashModalSubmitBtn.addEventListener(
-    "click",
-    () => {
-      api
-        .deleteCard(card._id)
-        .then(() => {
-          card.removeCard();
-          trashConfirmPopup.close();
-        })
-        .catch((err) => {
-          console.error("Error deleting card:", err);
-        });
-    },
-    { once: true }
-  );
 }
 
 function handleLikeIconClick(card) {
