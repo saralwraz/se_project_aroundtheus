@@ -195,9 +195,6 @@ function renderer(cardData) {
   cardSection.addItem(cardElement);
 }
 
-// Initialize Section
-cardSection.renderItems();
-
 // Event Listeners
 profileEditBtn.addEventListener("click", () => {
   const userData = userInfo.getUserInfo();
@@ -230,9 +227,7 @@ api
 api
   .getCards()
   .then((cardsData) => {
-    cardsData.forEach((cardItem) => {
-      renderer(cardItem);
-    });
+    cardSection.renderItems(cardsData);
   })
   .catch((err) => {
     console.error("Error fetching initial cards", err);
