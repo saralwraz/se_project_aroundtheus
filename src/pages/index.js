@@ -48,6 +48,7 @@ profileEditPopup.setEventListeners();
 addCardPopup.setEventListeners();
 editAvatarPopup.setEventListeners();
 trashConfirmPopup.setEventListeners();
+previewImagePopup.setEventListeners();
 
 // Section
 const cardSection = new Section({ items: [], renderer }, ".cards__list");
@@ -86,7 +87,7 @@ function handleProfileEditSubmit(profileData) {
       userInfo.setUserInfo(name, about);
       profileEditPopup.close();
       profileEditForm.reset();
-      profileEditFormValidator._disableSubmitButton();
+      profileEditFormValidator.disableSubmitButton();
     })
     .catch((err) => {
       console.error("Error updating profile:", err);
@@ -98,7 +99,6 @@ function handleProfileEditSubmit(profileData) {
 
 function handleAddCardSubmit(newCardData) {
   addCardPopup.renderLoading(true);
-  const submitButton = addCardPopup._submitButton;
 
   return api
     .postCards(newCardData)
@@ -106,7 +106,7 @@ function handleAddCardSubmit(newCardData) {
       renderer(cardData);
       addCardPopup.close();
       addCardForm.reset();
-      submitButton.disabled = false;
+      addCardFormValidator.disableSubmitButton();
     })
     .catch((err) => {
       console.error("Error adding card:", err);
@@ -118,7 +118,7 @@ function handleAddCardSubmit(newCardData) {
 
 function handleAvatarSubmit(formData) {
   const avatarLink = formData["modal__form-input-link"];
-  const submitButton = editAvatarPopup._submitButton;
+  const submitButton = editAvatarPopup.submitButton;
 
   editAvatarPopup.renderLoading(true);
 
