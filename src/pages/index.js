@@ -99,6 +99,7 @@ function handleProfileEditSubmit(profileData) {
 
 function handleAddCardSubmit(newCardData) {
   addCardPopup.renderLoading(true);
+  const submitButton = addCardPopup.submitButton;
 
   return api
     .postCards(newCardData)
@@ -106,7 +107,7 @@ function handleAddCardSubmit(newCardData) {
       renderer(cardData);
       addCardPopup.close();
       addCardForm.reset();
-      addCardFormValidator.disableSubmitButton();
+      submitButton.disabled = false;
     })
     .catch((err) => {
       console.error("Error adding card:", err);

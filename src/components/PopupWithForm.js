@@ -8,6 +8,7 @@ export default class PopupWithForm extends Popup {
     this._handleFormSubmission = handleFormSubmission;
     this._submitButton = this._popupElement.querySelector(".modal__button");
     this._defaultButtonText = this._submitButton.textContent;
+    this._setEventListeners();
   }
 
   _getInputValues() {
@@ -24,22 +25,24 @@ export default class PopupWithForm extends Popup {
     });
   }
 
-  setEventListeners() {
+  _setEventListeners() {
     this._popupForm.addEventListener("submit", async (event) => {
       event.preventDefault();
       const data = this._getInputValues();
       this.renderLoading(true);
 
-      await this.handleFormSubmission(data);
+      await this._handleFormSubmission(data);
+
+      this.close();
+      this.renderLoading(false);
     });
-    super.setEventListeners();
   }
 
   renderLoading(isLoading, loadingText = "Saving...") {
     if (isLoading) {
-      this.submitButton.textContent = loadingText;
+      this._submitButton.textContent = loadingText;
     } else {
-      this.submitButton.textContent = this._defaultButtonText;
+      this._submitButton.textContent = this._defaultButtonText;
     }
   }
 

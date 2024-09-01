@@ -1,4 +1,3 @@
-// In FormValidator.js
 export default class FormValidator {
   constructor(config, formElement) {
     this._config = config;
@@ -9,18 +8,8 @@ export default class FormValidator {
     this._submitButton = this._formElement.querySelector(
       this._config.submitButtonSelector
     );
-    this._originalInputValues = this._getInputValues();
-  }
-
-  _getInputValues() {
-    return this._inputList.map((input) => input.value);
-  }
-
-  _hasInputChanged() {
-    const currentInputValues = this._getInputValues();
-    return currentInputValues.some(
-      (value, index) => value !== this._originalInputValues[index]
-    );
+    this._inputErrorClass = this._config.inputErrorClass;
+    this._errorClass = this._config.errorClass;
   }
 
   disableSubmitButton() {
@@ -34,21 +23,37 @@ export default class FormValidator {
   }
 
   _checkInputValidity(inputElement) {
-    // Implementation for checking input validity
+    if (!inputElement.validity.valid) {
+      this._showInputError(inputElement);
+    } else {
+      this._hideInputError(inputElement);
+    }
   }
 
-  _setEventListeners() {
-    this._toggleButtonState(); // Initial button state check
-    this._inputList.forEach((inputElement) => {
-      inputElement.addEventListener("input", () => {
-        this._checkInputValidity(inputElement);
-        this._toggleButtonState();
-      });
-    });
+  _showInputError(inputElement) {
+    const errorElement = this._formElement.querySelector(
+      `#${inputElement.id}-error`
+    );
+    if (errorElement) {
+      inputElement.classList.add(this._inputErrorClass);
+      errorElement.textContent = inputElement.validationMessage;
+      errorElement.classList.add(this._errorClass);
+    }
+  }
+
+  _hideInputError(inputElement) {
+    const errorElement = this._formElement.querySelector(
+      `#${inputElement.id}-error`
+    );
+    if (errorElement) {
+      inputElement.classList.remove(this._inputErrorClass);
+      errorElement.classList.remove(this._errorClass);
+      errorElement.textContent = "";
+    }
   }
 
   _toggleButtonState() {
-    if (this._hasInvalidInput() || !this._hasInputChanged()) {
+    if (this._hasInvalidInput()) {
       this.disableSubmitButton();
     } else {
       this.enableSubmitButton();
@@ -57,6 +62,16 @@ export default class FormValidator {
 
   _hasInvalidInput() {
     return this._inputList.some((inputElement) => !inputElement.validity.valid);
+  }
+
+  _setEventListeners() {
+    this._toggleButtonState();
+    this._inputList.forEach((inputElement) => {
+      inputElement.addEventListener("input", () => {
+        this._checkInputValidity(inputElement);
+        this._toggleButtonState();
+      });
+    });
   }
 
   enableValidation() {
