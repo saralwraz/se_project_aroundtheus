@@ -140,13 +140,10 @@ function handleImageClick(card) {
 }
 
 function handleDelete(card) {
-  console.log("Delete function called");
   trashConfirmPopup.setSubmitFunction(() => {
-    console.log("Submit function in PopupWithConfirm is called");
     api
       .deleteCard(card._id)
       .then(() => {
-        console.log("Card about to be removed:", card);
         card.removeCard();
         trashConfirmPopup.close();
       })
