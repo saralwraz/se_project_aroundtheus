@@ -52,10 +52,6 @@ export default class PopupWithForm extends Popup {
 
   open() {
     super.open();
-    this._inputList.forEach((input) => {
-      input.value = "";
-    });
-    this._checkFormValidity();
   }
 
   renderLoading(isLoading, loadingText = "Saving...") {

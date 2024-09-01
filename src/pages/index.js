@@ -93,7 +93,6 @@ function handleProfileEditSubmit(profileData) {
       userInfo.setUserInfo(name, about);
       profileEditPopup.close();
       profileEditForm.reset();
-      profileEditFormValidator.disableSubmitButton();
     })
     .catch((err) => {
       console.error("Error updating profile:", err);
@@ -204,6 +203,7 @@ profileEditBtn.addEventListener("click", () => {
   profileTitleInput.value = userData.name;
   profileDescriptionInput.value = userData.about;
   profileEditPopup.open();
+  profileEditFormValidator.disableSubmitButton();
 });
 
 addCardButton.addEventListener("click", () => addCardPopup.open());
