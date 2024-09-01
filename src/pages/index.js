@@ -99,7 +99,6 @@ function handleProfileEditSubmit(profileData) {
 
 function handleAddCardSubmit(newCardData) {
   addCardPopup.renderLoading(true);
-  const submitButton = addCardPopup.submitButton;
 
   return api
     .postCards(newCardData)
@@ -107,7 +106,6 @@ function handleAddCardSubmit(newCardData) {
       renderer(cardData);
       addCardPopup.close();
       addCardForm.reset();
-      submitButton.disabled = false;
     })
     .catch((err) => {
       console.error("Error adding card:", err);
@@ -119,7 +117,6 @@ function handleAddCardSubmit(newCardData) {
 
 function handleAvatarSubmit(formData) {
   const avatarLink = formData["modal__form-input-link"];
-  const submitButton = editAvatarPopup.submitButton;
 
   editAvatarPopup.renderLoading(true);
 
@@ -129,7 +126,6 @@ function handleAvatarSubmit(formData) {
       userInfo.setAvatarPic(avatarLink);
       editAvatarPopup.close();
       avatarForm.reset();
-      submitButton.disabled = false;
     })
     .catch((err) => {
       console.error("Error updating avatar:", err);
