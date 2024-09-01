@@ -65,6 +65,12 @@ addCardFormValidator.enableValidation();
 const avatarFormValidator = new FormValidator(config, avatarForm);
 avatarFormValidator.enableValidation();
 
+document.addEventListener("DOMContentLoaded", () => {
+  const formElement = document.querySelector("#changeprofile_form");
+  const formValidator = new FormValidator(config, formElement);
+  formValidator.enableValidation();
+});
+
 // Constants
 const profileEditBtn = document.querySelector("#profile__edit-button");
 const addCardButton = document.querySelector(".profile__add-button");
