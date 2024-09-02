@@ -65,12 +65,6 @@ addCardFormValidator.enableValidation();
 const avatarFormValidator = new FormValidator(config, avatarForm);
 avatarFormValidator.enableValidation();
 
-document.addEventListener("DOMContentLoaded", () => {
-  const formElement = document.querySelector("#changeprofile_form");
-  const formValidator = new FormValidator(config, formElement);
-  formValidator.enableValidation();
-});
-
 // Constants
 const profileEditBtn = document.querySelector("#profile__edit-button");
 const addCardButton = document.querySelector(".profile__add-button");
@@ -116,6 +110,7 @@ function handleAddCardSubmit(newCardData) {
       renderer(cardData);
       addCardPopup.close();
       addCardForm.reset();
+      addCardFormValidator.disableSubmitButton();
     })
     .catch((err) => {
       console.error("Error adding card:", err);
@@ -137,6 +132,7 @@ function handleAvatarSubmit(formData) {
       userInfo.setAvatarPic(avatarLink);
       editAvatarPopup.close();
       avatarForm.reset();
+      avatarFormValidator.disableSubmitButton();
     })
     .catch((err) => {
       console.error("Error updating avatar:", err);
