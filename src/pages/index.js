@@ -102,7 +102,12 @@ function handleProfileEditSubmit(profileData) {
     });
 }
 
+let isSubmitting = false;
+
 function handleAddCardSubmit(newCardData) {
+  if (isSubmitting) return;
+  isSubmitting = true;
+
   addCardPopup.renderLoading(true);
 
   return api
@@ -117,6 +122,7 @@ function handleAddCardSubmit(newCardData) {
     })
     .finally(() => {
       addCardPopup.renderLoading(false);
+      isSubmitting = false;
     });
 }
 
