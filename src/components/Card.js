@@ -74,6 +74,10 @@ export default class Card {
     this._cardImage = this.cardElement.querySelector(".card__image");
     this._cardTitle = this.cardElement.querySelector(".card__text");
 
+    this._isLiked = this._likes.some(
+      (user) => user._id === this._currentUserId
+    );
+
     this._updateHeartIcon();
     this._setCardData();
     this._setEventListeners();
