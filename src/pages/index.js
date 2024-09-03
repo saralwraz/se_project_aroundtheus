@@ -168,10 +168,14 @@ function handleLikeIconClick(card) {
 
   apiAction
     .then(() => {
-      card.updateHeartIcon();
+      card.isLiked = !card.isLiked;
+      card.updateHeartIcon(card.isLiked);
     })
     .catch((err) => {
-      console.error(`Error ${card.isLiked ? "unliking" : "liking"} card:`, err);
+      console.error(
+        `Error ${card._isLiked ? "unliking" : "liking"} card:`,
+        err
+      );
     });
 }
 
@@ -182,7 +186,7 @@ function createCard(cardData) {
       altName: cardData.altName || "",
       link: cardData.link,
       _id: cardData._id,
-      isLiked: cardData.isLiked || false,
+      isLiked: false,
       likes: cardData.likes,
     },
     "#card__template",

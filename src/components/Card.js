@@ -1,31 +1,26 @@
 export default class Card {
   constructor(
-    { name, altName, link, _id, isLiked, likes = [] },
+    { name, link, _id, isLiked },
     cardSelector,
     handleImageClick,
     handleConfirmModal,
     handleLikeIconClick,
-    api,
     currentUserId
   ) {
     this.name = name;
-    this.altName = altName;
     this.link = link;
     this._id = _id;
     this._isLiked = isLiked;
-    this._likes = likes;
     this._cardSelector = cardSelector;
     this._handleImageClick = handleImageClick;
     this._handleLikeIconClick = handleLikeIconClick;
     this._handleConfirmModal = handleConfirmModal;
-    this._api = api;
     this._currentUserId = currentUserId;
     this.cardElement = null;
   }
 
   _setCardData() {
     this._cardImage.src = this.link;
-    this._cardImage.alt = this.altName;
     this._cardTitle.textContent = this.name;
   }
 
@@ -54,15 +49,6 @@ export default class Card {
     this._likeButton.classList.toggle("card__heart_active", this._isLiked);
   }
 
-  _updateCardData(updatedCard) {
-    this._likes = updatedCard.likes || [];
-    this._isLiked = this._likes.some(
-      (user) => user._id === this._currentUserId
-    );
-
-    this._updateHeartIcon();
-  }
-
   getView() {
     this.cardElement = document
       .querySelector(this._cardSelector)
@@ -73,10 +59,6 @@ export default class Card {
     this._trashButton = this.cardElement.querySelector(".card__trashcan");
     this._cardImage = this.cardElement.querySelector(".card__image");
     this._cardTitle = this.cardElement.querySelector(".card__text");
-
-    this._isLiked = this._likes.some(
-      (user) => user._id === this._currentUserId
-    );
 
     this._updateHeartIcon();
     this._setCardData();
