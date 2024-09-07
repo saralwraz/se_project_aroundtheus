@@ -10,7 +10,7 @@ export default class Card {
     this.name = name;
     this.link = link;
     this._id = _id;
-    this._isLiked = isLiked;
+    this.isLiked = isLiked;
     this._cardSelector = cardSelector;
     this._handleImageClick = handleImageClick;
     this._handleLikeIconClick = handleLikeIconClick;
@@ -37,7 +37,7 @@ export default class Card {
   }
 
   _updateHeartIcon() {
-    if (this._isLiked) {
+    if (this.isLiked) {
       this._likeButton.classList.add("card__heart_active");
     } else {
       this._likeButton.classList.remove("card__heart_active");
@@ -45,8 +45,8 @@ export default class Card {
   }
 
   updateHeartIcon(isLiked) {
-    this._isLiked = isLiked;
-    this._likeButton.classList.toggle("card__heart_active", this._isLiked);
+    this.isLiked = isLiked;
+    this._likeButton.classList.toggle("card__heart_active", this.isLiked);
   }
 
   getView() {

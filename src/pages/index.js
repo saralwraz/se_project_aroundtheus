@@ -162,6 +162,7 @@ function handleDelete(card) {
 }
 
 function handleLikeIconClick(card) {
+  console.log(card);
   const apiAction = card.isLiked
     ? api.deleteCardLike(card._id)
     : api.putCardLike(card._id);
@@ -172,10 +173,7 @@ function handleLikeIconClick(card) {
       card.updateHeartIcon(card.isLiked);
     })
     .catch((err) => {
-      console.error(
-        `Error ${card._isLiked ? "unliking" : "liking"} card:`,
-        err
-      );
+      console.error(`Error ${card.isLiked ? "unliking" : "liking"} card:`, err);
     });
 }
 
@@ -186,8 +184,7 @@ function createCard(cardData) {
       altName: cardData.altName || "",
       link: cardData.link,
       _id: cardData._id,
-      isLiked: false,
-      likes: cardData.likes,
+      isLiked: cardData.isLiked,
     },
     "#card__template",
     handleImageClick,
