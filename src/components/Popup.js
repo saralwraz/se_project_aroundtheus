@@ -3,12 +3,12 @@ export default class Popup {
     this._popupElement = document.querySelector(popupSelector);
     this._closeButton = this._popupElement.querySelector(".modal__close");
     this._handleEscClose = this._handleEscClose.bind(this);
+    this.setEventListeners = this.setEventListeners;
   }
 
   open() {
     this._popupElement.classList.add("modal_opened");
     document.addEventListener("keydown", this._handleEscClose);
-    this.setEventListeners();
   }
 
   close() {

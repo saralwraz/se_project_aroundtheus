@@ -78,6 +78,10 @@
   width: 100%;
 }
 
+.modal__form-trashcan {
+  margin: 0;
+}
+
 .modal__image {
   align-items: center;
   justify-content: center;
